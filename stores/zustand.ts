@@ -1,7 +1,7 @@
 import {create} from 'zustand'
 
 interface Entry {
-    id: number;
+    indexId: number;
     description: string;
     title?: string;
     type: string;
@@ -37,9 +37,12 @@ interface Store {
     nextId: number,
     setEntriesData: (data: Entry[]) => void,
     incrementNextId: () => void,
+
     profilData: profilDataI,
     linkData: linDataI,
+
     linktire: string | null,
+    
     comp_color: string | null,
     bg_color: string | null,
     text_color: string | null,
