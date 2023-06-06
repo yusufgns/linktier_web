@@ -3,22 +3,19 @@ import clsx from 'clsx';
 import {useUser} from '@/stores/User'
 
 interface SituationProps {
-  type: null | string,
+  type: 'Completing' | 'Over Due' | 'Planned' | 'Empty' | null | string,
+  completing_color: string | null,
+  overdue_color: string | null,
 }
 
-const Situation: React.FC<SituationProps> = ({
-  type,
-}) => {
-  const {completing_color, overdue_color} = useUser()
-
-  console.log(completing_color)
-
+const Situation: React.FC<SituationProps> = ({type, completing_color, overdue_color}: SituationProps) => {
   return (
     <div
       className={clsx(
         'text-[10px] text-center my-auto py-[2px] px-[10px] rounded font-medium',
         type === 'Completing' && `bg-[${completing_color}]`,
         type === 'Over Due' && `bg-[${overdue_color}]`,
+
       )}
     >
       {type === 'Completing' && <p>Completing</p>}

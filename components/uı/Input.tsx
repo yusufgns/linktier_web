@@ -6,6 +6,7 @@ interface InputsI {
     placeholder: 'Full Name' | 'Web Site' | 'Link' | string,
     length: number | undefined,
     onChange: (e: any) => any,
+    onClick?: (e: any) => any,
     value: string | number | any
 }
 
@@ -14,7 +15,8 @@ const Inputs: React.FC<InputsI> = ({
     length,
     placeholder,
     onChange,
-    value
+    value,
+    onClick
 }: InputsI) => {
     return (
         <span>
@@ -23,6 +25,7 @@ const Inputs: React.FC<InputsI> = ({
                 maxLength={length}
                 placeholder={placeholder}
                 onChange={onChange}
+                onClick={onClick}
                 type="text"
                 value={value}
                 required

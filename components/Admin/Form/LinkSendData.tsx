@@ -1,21 +1,25 @@
 'use client'
 import React, {useState} from 'react'
-import {useStore} from '@/stores/zustand'
 import {BsGlobe2, BsTwitter, BsYoutube, BsInstagram, BsDribbble, BsBehance, BsGithub} from 'react-icons/bs'
 import Input from '@/components/uı/Input'
+import { useUser } from '@/stores/User'
+import clsx from 'clsx'
 
 export default function LinkSendData() {
+    const {linkData} = useUser()
+    const bio_links: any = linkData ? linkData : {};
+
     const [link, setLink] = useState('website')
-    const [links, setLinks] = useState(
-        [
+    const [ilinks, setLinks] = useState(
+    [
             {
-            website: '',
-            instagram: '',
-            youtube: '',
-            twitter: '',
-            github: '',
-            behance: '',
-            dribbble: ''
+                website: bio_links.website,
+                instagram: bio_links.instagram,
+                youtube: bio_links.youtube,
+                twitter: bio_links.twitter,
+                github: bio_links.github,
+                behance: bio_links.behance,
+                dribbble:bio_links.dribbble,
             }
         ]
     )
@@ -24,15 +28,15 @@ export default function LinkSendData() {
     const linkSendData = (e: any) => {
         e.preventDefault();
 
-        useStore.setState({
+        useUser.setState({
             linkData: {
-                website: links[0]?.website,
-                instagram: links[0]?.instagram,
-                youtube: links[0]?.youtube,
-                twitter: links[0]?.twitter,
-                github: links[0]?.github,
-                behance: links[0]?.behance,
-                dribbble: links[0]?.dribbble
+                website: ilinks[0]?.website,
+                instagram: ilinks[0]?.instagram,
+                youtube: ilinks[0]?.youtube,
+                twitter: ilinks[0]?.twitter,
+                github: ilinks[0]?.github,
+                behance: ilinks[0]?.behance,
+                dribbble: ilinks[0]?.dribbble
             }
         });
     }
@@ -47,34 +51,61 @@ export default function LinkSendData() {
                     h-fit
                     px-[25px]
                     py-[20px]
-                    w-[660px]
-                    text-white'>
-                    <div className='text-[20px] text-white gap-[10px] my-[15px] flex items-center'>
-                        <div onClick={(e) => setLink('website')}>
+                    w-[660px]'>
+                    <div className='text-[20px] gap-[10px] my-[15px] flex items-center'>
+                        <div className={clsx(ilinks[0].website !== '' || link === 'website' && 'text-white opacity-70',
+                        ilinks[0].website !== '' && 'text-white',
+                            link !== 'website' && bio_links.website === '' && 'opacity-20'
+                            )}
+                            onClick={(e) => setLink('website')}>
                             <BsGlobe2 />
                         </div>
 
-                        <div onClick={(e) => setLink('instagram')}>
+                        <div className={clsx(ilinks[0].instagram !== '' || link === 'instagram' && 'text-white opacity-70',
+                        ilinks[0].instagram !== '' && 'text-white',
+                            link !== 'instagram' && bio_links.instagram === '' && 'opacity-20'
+                            )}
+                        onClick={(e) => setLink('instagram')}>
                             <BsInstagram />
                         </div>
 
-                        <div onClick={(e) => setLink('twitter')}>
+                        <div className={clsx(bio_links.twitter !== '' || link === 'twitter' && 'text-white opacity-70',
+                        ilinks[0].twitter !== '' && 'text-white',
+                            link !== 'twitter' && bio_links.twitter === '' && 'opacity-20'
+                            )}
+                        onClick={(e) => setLink('twitter')}>
                             <BsTwitter />
                         </div>
 
-                        <div onClick={(e) => setLink('youtube')}>
+                        <div className={clsx(bio_links.youtube !== '' || link === 'youtube' && 'text-white opacity-70',
+                        ilinks[0].youtube !== '' && 'text-white',
+                            link !== 'youtube' && bio_links.youtube === '' && 'opacity-20'
+                            )}
+                        onClick={(e) => setLink('youtube')}>
                             <BsYoutube />
                         </div>
 
-                        <div onClick={(e) => setLink('github')}>
+                        <div className={clsx(bio_links.github !== '' || link === 'github' && 'text-white opacity-70',
+                        ilinks[0].github !== '' && 'text-white',
+                            link !== 'github' && bio_links.github === '' && 'opacity-20'
+                            )}
+                        onClick={(e) => setLink('github')}>
                             <BsGithub />
                         </div>
 
-                        <div onClick={(e) => setLink('dribbble')}>
+                        <div className={clsx(bio_links.dribbble !== '' || link === 'dribbble' && 'text-white opacity-70',
+                           ilinks[0].dribbble !== '' && 'text-white',
+                            link !== 'dribbble' && bio_links.dribbble === '' && 'opacity-20'
+                            )}
+                        onClick={(e) => setLink('dribbble')}>
                             <BsDribbble />
                         </div>
 
-                        <div onClick={(e) => setLink('behance')}>
+                        <div className={clsx(bio_links.behance !== '' || link === 'behance' && 'text-white opacity-70',
+                        ilinks[0].behance !== '' && 'text-white',
+                            link !== 'behance' && bio_links.behance === '' && 'opacity-20'
+                            )}
+                        onClick={(e) => setLink('behance')}>
                             <BsBehance />
                         </div>
                     </div>
@@ -85,14 +116,15 @@ export default function LinkSendData() {
                                 length={80}
                                 placeholder='website'
                                 type={'website'}
-                                value={links[0]?.website}
+                                value={ilinks[0]?.website}
                                 onChange={(e) =>
                                     setLinks((prevLinks) => [
                                     {
                                         ...prevLinks[0],
                                         website: e.target.value,
                                     },
-                                    ])
+                                    ]
+                                    )
                                 }
                             ></Input>
                         }
@@ -102,7 +134,7 @@ export default function LinkSendData() {
                                 length={80}
                                 placeholder='instagram'
                                 type={'website'}
-                                value={links[0]?.instagram}
+                                value={ilinks[0]?.instagram}
                                 onChange={(e) =>
                                     setLinks((prevLinks) => [
                                     {
@@ -119,7 +151,7 @@ export default function LinkSendData() {
                                 length={80}
                                 placeholder='twitter'
                                 type={'website'}
-                                value={links[0]?.twitter}
+                                value={ilinks[0]?.twitter}
                                 onChange={(e) =>
                                     setLinks((prevLinks) => [
                                     {
@@ -136,7 +168,7 @@ export default function LinkSendData() {
                                 length={80}
                                 placeholder='youtube'
                                 type={'website'}
-                                value={links[0]?.youtube}
+                                value={ilinks[0]?.youtube}
                                 onChange={(e) =>
                                     setLinks((prevLinks) => [
                                     {
@@ -153,7 +185,7 @@ export default function LinkSendData() {
                                 length={80}
                                 placeholder='github'
                                 type={'website'}
-                                value={links[0]?.github}
+                                value={ilinks[0]?.github}
                                 onChange={(e) =>
                                     setLinks((prevLinks) => [
                                     {
@@ -170,7 +202,7 @@ export default function LinkSendData() {
                                 length={80}
                                 placeholder='dribbble'
                                 type={'website'}
-                                value={links[0]?.dribbble}
+                                value={ilinks[0]?.dribbble}
                                 onChange={(e) =>
                                     setLinks((prevLinks) => [
                                     {
@@ -187,7 +219,7 @@ export default function LinkSendData() {
                                 length={80}
                                 placeholder='behance'
                                 type={'website'}
-                                value={links[0]?.behance}
+                                value={ilinks[0]?.behance}
                                 onChange={(e) =>
                                     setLinks((prevLinks) => [
                                     {

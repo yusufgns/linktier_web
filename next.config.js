@@ -10,7 +10,9 @@ const nextConfig = {
             "avatars.githubusercontent.com",
             "api.dicebear.com",
             "avatars.dicebear.com",
-            "lh3.googleusercontent.com"
+            "lh3.googleusercontent.com",
+            "pbs.twimg.com",
+            "nmcceegbiexzqgkclyxx.supabase.co"
         ],
         formats: ["image/webp"],
     },

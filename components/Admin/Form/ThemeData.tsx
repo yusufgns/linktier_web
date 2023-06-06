@@ -1,33 +1,18 @@
 'use client'
 import React from 'react'
-import { useStore } from '@/stores/zustand'
-import Themes from '@/components/uı/Admin/themes'
+
+import { useUser } from '@/stores/User'
 import TextThemes from '@/components/uı/Admin/TextThemes'
 import SituationTheme from '@/components/uı/Admin/SituationThemes'
 
 export default function ThemeData() {
-     const {bg_color, comp_color, complating_color, overdue_color,  situation_color, text_color} = useStore()
+     const {setBg_color, setCompC, setTextC, setOverdueC, setCompletingC} = useUser()
 
-    const themeData = (bg_c: any, cp_c: any) => {
-        useStore.setState({
-            bg_color: bg_c,
-            comp_color: cp_c,
-        });
-    }
-
-    const textTheme = (bg_c: any) => {
-        useStore.setState({
-            text_color: bg_c,
-        });
-    }
-
-    const situationTheme = (completing_c: any, over_c: any, text_c: any) => {
-        useStore.setState({
-            complating_color: completing_c,
-            overdue_color: over_c,
-            situation_color: text_c,
-        });
-    }
+    const bg_color = (bg_c: any) => setBg_color(bg_c)
+    const CompC = (cp_c: any) => setCompC(cp_c)
+    const textTheme = (bg_c: any) => {setTextC(bg_c)}
+    const Completing = (bg_c: any) => {setCompletingC(bg_c)}
+    const Overdue = (bg_c: any) => {setOverdueC(bg_c)}
 
   return (
     <div
@@ -44,79 +29,128 @@ export default function ThemeData() {
     gap-[40px]
     '>  
         <span>
-            <div className='mb-[10px]'>Component Color</div>
-            <div className='flex items-center gap-[18.5px] flex-wrap justify-center'>
-                <Themes
+            <div className='mb-[10px]'>Background Color</div>
+            <div className='flex items-center gap-2 flex-wrap'>
+                <TextThemes
                 bg_c={'#171717'} 
-                cp_c={'#121212'}
-                onClick={() => themeData('#121212', '#171717')}
-                ></Themes>
+                onClick={() => (bg_color('#171717')) }
+                ></TextThemes>
 
-                <Themes
-                bg_c={'#ffff'} 
-                cp_c={'#E6E8E9'}
-                onClick={() => themeData('#ffff', '#E6E8E9')}
-                ></Themes>
-
-                <Themes
+                <TextThemes
                 bg_c={'#393646'} 
-                cp_c={'#6D5D6E'}
-                onClick={() => themeData('#393646', '#6D5D6E')}
-                ></Themes>
+                onClick={() => bg_color('#393646')}
+                ></TextThemes>
 
-                <Themes
-                bg_c={'#8D7B68'} 
-                cp_c={'#C8B6A6'}
-                onClick={() => themeData('#8D7B68', '#C8B6A6')}
-                ></Themes>
-
-                <Themes
+                <TextThemes
                 bg_c={'#4D455D'} 
-                cp_c={'#A75D5D'}
-                onClick={() => themeData('#4D455D', '#A75D5D')}
-                ></Themes>
+                onClick={() => bg_color('#4D455D')}
+                ></TextThemes>
+                
+                <TextThemes
+                bg_c={'#8D7B68'} 
+                onClick={() => bg_color('#8D7B68')}
+                ></TextThemes>
 
-                <Themes
-                bg_c={'#495371'} 
-                cp_c={'#27374D'}
-                onClick={() => themeData('#495371', '#27374D')}
-                ></Themes>
 
-                <Themes
+                <TextThemes
                 bg_c={'#9BA888'} 
-                cp_c={'#4D455D'}
-                onClick={() => themeData('#9BA888', '#4D455D')}
-                ></Themes>
+                onClick={() => bg_color('#9BA888')}
+                ></TextThemes>
 
-                <Themes
-                bg_c={'#594545'} 
-                cp_c={'#FFF8EA'}
-                onClick={() => themeData('#594545', '#FFF8EA')}
-                ></Themes>
-
-                <Themes
+                <TextThemes
                 bg_c={'#495371'} 
-                cp_c={'#99A799'}
-                onClick={() => themeData('#495371', '#99A799')}
-                ></Themes>
+                onClick={() => bg_color( '#495371')}
+                ></TextThemes>
 
-                <Themes
+                <TextThemes
+                bg_c={'#316B83'}
+                onClick={() => bg_color('#316B83')}
+                ></TextThemes>
+
+                <TextThemes
                 bg_c={'#FFF323'} 
-                cp_c={'#D06224'}
-                onClick={() => themeData('#FFF323', '#D06224')}
-                ></Themes>
+                onClick={() => bg_color( '#FFF323')}
+                ></TextThemes>
+                
+                <TextThemes
+                bg_c={'#594545'} 
+                onClick={() => bg_color('#594545')}
+                ></TextThemes>
 
-                <Themes
-                bg_c={'#316B83'} 
-                cp_c={'#C6D57E'}
-                onClick={() => themeData('#316B83', '#C6D57E')}
-                ></Themes>
+
+
+                <TextThemes
+                bg_c={'#ffff'} 
+                onClick={() => bg_color('#ffff')}
+                ></TextThemes>
+            </div>
+        </span>
+
+        <span>
+            <div className='mb-[10px]'>Component Color</div>
+            <div className='flex items-center gap-2 flex-wrap'>
+                <TextThemes
+                bg_c={'#121212'}
+                onClick={() => (CompC('#121212')) }
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#4D455D'}
+                onClick={() => CompC('#4D455D')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#6D5D6E'}
+                onClick={() => CompC( '#6D5D6E')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#C8B6A6'}
+                onClick={() => CompC('#C8B6A6')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#99A799'}
+                onClick={() => CompC('#99A799')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#27374D'}
+                onClick={() => CompC( '#27374D')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#A75D5D'}
+                onClick={() => CompC( '#A75D5D')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#C6D57E'}
+                onClick={() => CompC('#C6D57E')}
+                ></TextThemes>
+
+
+                <TextThemes
+                bg_c={'#D06224'}
+                onClick={() => CompC( '#D06224')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#E6E8E9'}
+                onClick={() => CompC( '#E6E8E9')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#FFF8EA'}
+                onClick={() => CompC( '#FFF8EA')}
+                ></TextThemes>
+                
             </div>
         </span>
 
         <span>
             <div className='mb-[10px]'>Text Color</div>
-            <div className='flex items-center gap-[18.5px] flex-wrap justify-center'>
+            <div className='flex items-center gap-2 flex-wrap'>
                 <TextThemes
                 bg_c={'#000'}
                 onClick={() => textTheme('#000')}
@@ -154,31 +188,44 @@ export default function ThemeData() {
             </div>
         </span>
 
-        <span>
-            <div className='mb-[10px]'>Situation Color</div>
-            <div className='flex items-center gap-[18.5px] flex-wrap justify-center'>
-                <SituationTheme
-                completing_c={'rgb(57,109,63)'}
-                over_c={'#B33030'}
-                text_c={'#fff'}
-                onClick={() => situationTheme('rgb(57,109,63)', '#B33030', '#fff')}
-                ></SituationTheme>
+        {/* <span>
+            <div className='mb-[10px]'>Completing Color</div>
+            <div className='flex items-center gap-2 flex-wrap'>
+                <TextThemes
+                bg_c={'rgb(57,109,63)'}
+                onClick={() => Completing('rgb(57,109,63)')}
+                ></TextThemes>
+                <TextThemes
+                bg_c={'#226B80'}
+                onClick={() => Completing('#226B80')}
+                ></TextThemes>
 
-                <SituationTheme
-                completing_c={'#226B80'}
-                over_c={'#FF6138'}
-                text_c={'#fff'}
-                onClick={() => situationTheme('#226B80', '#FF6138', '#fff')}
-                ></SituationTheme>
-
-                <SituationTheme
-                completing_c={'#79BD8F'}
-                over_c={'#9B6B70'}
-                text_c={'#fff'}
-                onClick={() => situationTheme('#79BD8F', '#9B6B70', '#fff')}
-                ></SituationTheme>
+                <TextThemes
+                bg_c={'#79BD8F'}
+                onClick={() => Completing('#79BD8F')}
+                ></TextThemes>
             </div>
-        </span>
+        </span> */}
+
+         {/* <span>
+            <div className='mb-[10px]'>OverDue Color</div>
+            <div className='flex items-center gap-2 flex-wrap'>
+                    <TextThemes
+                bg_c={'#B33030'}
+                onClick={() => Overdue('#B33030')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#FF6138'}
+                onClick={() => Overdue('#FF6138')}
+                ></TextThemes>
+
+                <TextThemes
+                bg_c={'#9B6B70'}
+                onClick={() => Overdue('#9B6B70')}
+                ></TextThemes>
+            </div>
+        </span> */}
     </div>
   )
 }

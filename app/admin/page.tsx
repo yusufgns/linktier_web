@@ -1,10 +1,15 @@
-import MobilDesign from '@/components/MobilDesign'
 import FormUpdate from '@/components/Admin/Form/FormUpdate'
+import Mob from '@/components/Mobil'
+import { createClient } from '@/lib/supabase-server'
+import {useAuth} from '../../stores/Auth'
 
 
-export default function Settings() {
+async function Settings() {
+    const supabase = createClient()
+
+    const {data} = await supabase.auth.getUser()
+
     // const tasks = useStore(store => store.data)
-
 
     // useEffect(() => {
     //      fetchData()
@@ -22,9 +27,12 @@ export default function Settings() {
                 </div>
 
                 <div className='text-white flex mt-[10%]'>
-                    <MobilDesign></MobilDesign>
+                    {/* <MobilDesign></MobilDesign> */}
+                    <Mob></Mob>
                 </div>
             </div>
         </main>
     )
 }
+
+export default Settings

@@ -15,9 +15,9 @@ const Themes: React.FC<themesI> = ({onClick, bg_c}: themesI) => {
             className='
             flex 
             items-center 
-            h-[80px] 
-            rounded-md
-            w-fit
+            h-[30px]
+            w-[42px]
+            rounded
             z-20
             overflow-hidden
         '>

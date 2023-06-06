@@ -1,6 +1,8 @@
+'use client'
 import React from "react"
 import clsx from 'clsx'
 import Image  from 'next/image'
+import {useUser} from '@/stores/User'
 
 interface Situation {
     variant: 'header' | 'avatar',
@@ -12,9 +14,11 @@ const Situation: React.FC<Situation> = ({
     variant,
     srcs
 }) => {
+    const {useUsers} = useUser()
+    const users: any = useUsers ? useUsers : [];
     return (
         <Image
-            src={srcs}
+            src={'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/users/' + `${users[0].avatar_url}`}
             alt=""
             width={100}
             height={100}
