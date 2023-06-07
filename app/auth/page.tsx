@@ -7,11 +7,11 @@ import { useAuth } from '@/stores/Auth';
 
 const Auth = async () => {
     const supabase = createClient()
-    const {data} = await supabase.auth.getUser()
+    const {data} = await supabase.auth.getSession()
 
-    // if(data.session) {
-    //     redirect('/')
-    // }
+    if(data.session) {
+        redirect('/admin')
+    }
 
   return (
     <div className="flex items-center justify-center h-screen w-full">

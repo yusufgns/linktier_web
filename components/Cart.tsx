@@ -2,11 +2,13 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { useAuth } from '../stores/Auth';
+import { useUser } from '@/stores/User';
 
 function Cart() {
   const auth: any = useAuth.getState().session;
+  const {avatar_url} = useUser()
 
-  let url: any = auth?.session?.user?.user_metadata?.avatar_url;
+  let url: any = 'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/' + `${avatar_url}`
   //let fullname = user.length > 0 ? `${user[0]?.user_firstname} ${user[0]?.user_lastname}` : '';
 
   useEffect(() => {
@@ -28,10 +30,8 @@ function Cart() {
         rounded-full
       '
     >
-      <div className='flex items-center gap-[10px]'>
-        <div className='w-[50px] h-[50px] rounded-full'>
-          <Image src={url} alt='' width={50} height={50} className='rounded-full' />
-        </div>
+      <div>
+        <Image src={url} alt='' width={50} height={50} className='rounded-full w-[50px] h-[50px]' />
       </div>
     </div>
   );

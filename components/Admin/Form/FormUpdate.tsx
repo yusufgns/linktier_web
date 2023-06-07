@@ -12,6 +12,7 @@ import { useMobil } from '@/stores/Mobil'
 import supabase from '@/lib/supabase-client'
 import { useAuth } from '../../../stores/Auth'
 import {redirect} from 'next/navigation'
+import Settings from './Settings'
 
 
 export default function FormUpdate() {    
@@ -52,6 +53,10 @@ export default function FormUpdate() {
 
                 {linktire === 'theme' &&
                     <ThemeData />
+                }
+
+                {linktire === 'settings' &&
+                    <Settings />
                 }
             </div>
         </section>

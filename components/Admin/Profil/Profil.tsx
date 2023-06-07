@@ -8,7 +8,7 @@ import { useAuth } from '@/stores/Auth';
 
 
 export default function Profil() {
-    const {useUsers, text_color, user_lastname, user_firstname, user_name, bio, linkData} = useUser()
+    const {useUsers, text_color, user_lastname, user_firstname, user_name, bio, linkData, avatar_url} = useUser()
     const users: any = useUsers ? useUsers : [];
     const bio_links: any = linkData ? linkData : {};
     
@@ -28,7 +28,7 @@ export default function Profil() {
             style={{color: `${text_color}`}}
             >
             <div className='flex gap-4 items-center'>
-            <Avatars variant='header' srcs={url}></Avatars>
+            <Avatars variant='header'></Avatars>
                 <div>
                 <h1 className='font-medium'>{user_firstname} {user_lastname}</h1>
                 <p className='mt-1 opacity-70 font-medium text-[12px]'>@{user_name}</p>

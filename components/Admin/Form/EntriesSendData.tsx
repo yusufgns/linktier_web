@@ -126,7 +126,7 @@ export default function EntriesSendData() {
 
         <div className='w-full relative h-[40px]'>
           <p className='right-0 absolute bottom-0 bg-[#393E46] text-white font-medium px-[10px] py-[2px] rounded-md text-[15px] hover:bg-opacity-40 cursor-pointer outline-none'>
-            <button type='submit'>Save Entries</button>
+            <button type='submit'>Preview Entries</button>
           </p>
         </div>
       </form>

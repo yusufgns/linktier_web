@@ -1,8 +1,12 @@
 'use client'
 import supabase from "@/lib/supabase-client"
 import { useUser } from '../stores/User'
+import { useStore } from '../stores/zustand'
+
 
 export default function Situation({ stores }: any) {
+    const {linktire} = useStore()
+    console.log(linktire)
     const {
     bg_color,
     comp_color,
@@ -59,10 +63,14 @@ export default function Situation({ stores }: any) {
     }
 
     return (
-        <div className='flex w-full items-center justify-center'>
-            <button className='items-center flex justify-center absolute bottom-0 text-center bg-gray-600 py-[3px] px-[15px] mb-[5px] rounded-lg' onClick={updateData}>
-                Update Data
-            </button>
-        </div>
+        <>
+            {linktire !== 'settings' &&
+             <div className='flex w-full items-center justify-center'>
+                <button className='items-center flex justify-center absolute bottom-0 text-center bg-gray-600 py-[3px] px-[15px] mb-[5px] rounded-lg' onClick={updateData}>
+                    Update Data
+                </button>
+            </div>
+            }
+        </>
     )
 }

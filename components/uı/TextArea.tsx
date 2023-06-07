@@ -24,7 +24,7 @@ const TextArea: React.FC<TextAreaI> = ({
                 value={value}
                 className={clsx(
                     'outline-none mt-[10px] bg-[#393E46]',
-                    type === 'des' && 'w-[610px] h-[100px] min-h-[100px] max-h-[100px] p-[10px] rounded-lg'
+                    type === 'des' && 'w-[610px] h-[100px] min-h-[100px] max-h-[100px] p-[10px] rounded'
                 )}/>
             }
 
@@ -35,7 +35,7 @@ const TextArea: React.FC<TextAreaI> = ({
                 value={value}
                 className={clsx(
                     'outline-none mt-[10px] bg-[#393E46]',
-                    type === 'bio' && 'w-[610px] h-[100px] min-h-[100px] max-h-[100px] p-[10px] rounded-lg',
+                    type === 'bio' && 'w-[610px] h-[100px] min-h-[100px] max-h-[100px] p-[10px] rounded',
                 )} required/>
             }
         </span>

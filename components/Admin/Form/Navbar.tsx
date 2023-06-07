@@ -1,10 +1,7 @@
 'use client'
-import React, {useState} from 'react'
 import { useStore } from '@/stores/zustand'
 
-export default function Navbar() {
-    const store = useStore()
-    
+export default function Navbar() {    
     const linktierData = (e: any) => {
         useStore.setState({
             linktire: e
@@ -33,6 +30,7 @@ export default function Navbar() {
                 <div onClick={() => linktierData('entries')}>Entries</div>
                 <div onClick={() => linktierData('theme')}>Theme</div>
                 <div onClick={() => linktierData('profil')}>Profil</div>
+                <div onClick={() => linktierData('settings')}>Settings</div>
             </div>
         </span>
   )

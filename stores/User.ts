@@ -32,6 +32,7 @@ interface Store {
     setBio: (data: any) => void;
     setFirstName: (data: any) => void;
     setLastName: (data: any) => void;
+    setAvatarUrl: (data: any) => void;
 
     supabaseUsers: () => Promise<void>;
     useUsers: {};
@@ -46,6 +47,7 @@ interface Store {
     user_lastname?: string | undefined;
     user_firstname?: string | undefined;
     user_name?: string | undefined;
+    avatar_url?: string | undefined;
 }
 
 const store = (set: any): Store => ({
@@ -59,6 +61,7 @@ const store = (set: any): Store => ({
     setFirstName: (data: any) => set({ user_firstname: data }),
     setBio: (data: any) => set({ bio: data }),
     setUserName: (data: any) => set({ user_name: data }),
+    setAvatarUrl: (data: any) => set({ avatar_url: data }),
     
     useUsers: {},
     linkData: {
@@ -80,6 +83,7 @@ const store = (set: any): Store => ({
     user_lastname: '',
     user_firstname: '',
     user_name: '',
+    avatar_url: '',
 
     supabaseUsers: async () => {
         const { data: User } = await supabase
@@ -112,6 +116,7 @@ const store = (set: any): Store => ({
             user_lastname: supaUser[0].user_lastname,
             user_firstname: supaUser[0].user_firstname,
             user_name: supaUser[0].user_name,
+            avatar_url: supaUser[0].avatar_url,
             
             linkData: supaUser[0].bio_links,
         });

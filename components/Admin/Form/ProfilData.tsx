@@ -5,13 +5,17 @@ import {useUser} from '@/stores/User'
 import Input from '@/components/uı/Input'
 import { useRouter } from 'next/navigation'
 import supabase from '@/lib/supabase-client'
+import UploadAvatar from '@/components/uı/UploadAvatar'
+import {useFileStore} from '@/stores/SelectFile'
 
 export default function ProfilSendData() {
-    const {useUsers, setLastName, setFirstName, setUserName, setBio, user_firstname, user_lastname, bio} = useUser()
+    const {useUsers, setLastName, setFirstName, setUserName, setBio, user_firstname, user_lastname, bio, avatar_url, setAvatarUrl} = useUser()
+    const {selectedFile, previewImage} = useFileStore()
+
     const users: any = useUsers ? useUsers : [];
     const [ifirstname, setInputFirstName] = useState(user_firstname)
     const [ilastname, setInputLastName] = useState(user_lastname)
-    //const [iavatar, setInputAvatar] = useState()
+    const [iavatar, setInputAvatar] = useState(avatar_url)
     const [ibio, setInputBio] = useState(bio)
     
     const handleSubmit = async (e: any) => {
@@ -19,6 +23,7 @@ export default function ProfilSendData() {
         setFirstName(ifirstname);
         setLastName(ilastname);
         setBio(ibio);
+        setAvatarUrl(iavatar)
     };
     return (
         <span>
@@ -43,7 +48,7 @@ export default function ProfilSendData() {
 
                     <div className='w-full relative h-[40px]'>
                         <p className='right-0 absolute bottom-0 bg-[#393E46] text-white font-medium px-[10px] py-[2px] rounded-md text-[15px] hover:bg-opacity-40 cursor-pointer outline-none'>
-                            <button onClick={handleSubmit}>Save Profil</button>
+                            <button onClick={handleSubmit}>Preview Profil</button>
                         </p>
                     </div>
             </form>
