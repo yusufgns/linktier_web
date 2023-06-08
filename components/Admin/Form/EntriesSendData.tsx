@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Input from '@/components/uı/Input';
 import TextArea from '@/components/uı/TextArea';
 import Situation from '@/components/uı/Situations';

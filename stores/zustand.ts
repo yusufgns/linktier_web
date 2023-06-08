@@ -1,6 +1,5 @@
 import {create} from 'zustand'
 import supabase from '../lib/supabase-client'
-import {UserType} from '../types/user'
 
 interface linDataI {
     website: string | null,

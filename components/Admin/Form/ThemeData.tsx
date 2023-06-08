@@ -3,7 +3,6 @@ import React from 'react'
 
 import { useUser } from '@/stores/User'
 import TextThemes from '@/components/uı/Admin/TextThemes'
-import SituationTheme from '@/components/uı/Admin/SituationThemes'
 
 export default function ThemeData() {
      const {setBg_color, setCompC, setTextC, setOverdueC, setCompletingC} = useUser()

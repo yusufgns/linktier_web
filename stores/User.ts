@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import supabase from '../lib/supabase-client';
-import { UserType } from '../types/user';
 
 interface Entry {
     id: string;
@@ -86,10 +85,12 @@ const store = (set: any): Store => ({
     avatar_url: '',
 
     supabaseUsers: async () => {
+        const { data: userID } = await supabase.auth.getUser()
+        
         const { data: User } = await supabase
             .from('user')
             .select('*')
-            .eq('user_id', '12108e77-baa6-44dc-8d6c-f998e4b98973');
+            .eq('user_id', userID?.user?.id);
 
         const supaUser: any = User
             ? User.map((e: any) => ({

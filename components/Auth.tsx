@@ -1,11 +1,19 @@
 'use client'
 import React from 'react'
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { BsDiscord, BsGoogle } from 'react-icons/bs'
-import { createClient } from '@/lib/supabase-server';
-import { useSupabase } from '@/components/providers/supabase-provider';
+import supabase from '@/lib/supabase-client';
 
 export default function Auth() {
+  const router = useRouter()
+
+  async function deneme() {
+    const { data } = await supabase.auth.getSession()
+    if(data.session !== null) {
+      router.push('/admin')
+    }
+  }
+
   function getUrl() {
     let url =
     "http://localhost:3000/auth";
@@ -13,9 +21,7 @@ export default function Auth() {
     return url;
   }
 
-  const {supabase} = useSupabase()
-
-    async function signInWithGoogle() {
+  async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {

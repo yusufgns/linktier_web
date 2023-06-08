@@ -9,12 +9,12 @@
 		return (
 		<html lang="en">
 			<body className='bg-[#191f26]'>
-				<SupabaseProvider session={supabase}>
-					<ReactQueryProvider>
+				<ReactQueryProvider>
+					<SupabaseProvider session={supabase}>
 						{children}
-						<Cart />
-					</ReactQueryProvider>
-				</SupabaseProvider>
+						<Cart></Cart>
+					</SupabaseProvider>
+				</ReactQueryProvider>
 			</body>
 		</html>
 		)

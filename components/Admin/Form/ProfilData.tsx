@@ -3,9 +3,6 @@ import React, {useState} from 'react'
 import TextArea from '@/components/uı/TextArea'
 import {useUser} from '@/stores/User'
 import Input from '@/components/uı/Input'
-import { useRouter } from 'next/navigation'
-import supabase from '@/lib/supabase-client'
-import UploadAvatar from '@/components/uı/UploadAvatar'
 import {useFileStore} from '@/stores/SelectFile'
 
 export default function ProfilSendData() {

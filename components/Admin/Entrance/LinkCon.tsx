@@ -1,5 +1,4 @@
 'use client'
-import Input from "../../uı/Input"
 
 export default function SituationCon() {
     return (

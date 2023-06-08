@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useUser} from '@/stores/User'
 
 interface SituationProps {
   type: 'Completing' | 'Over Due' | 'Planned' | 'Empty' | null | string,

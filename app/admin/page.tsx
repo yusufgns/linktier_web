@@ -1,23 +1,19 @@
 import FormUpdate from '@/components/Admin/Form/FormUpdate'
 import Mob from '@/components/Mobil'
 import { createClient } from '@/lib/supabase-server'
-import {useAuth} from '../../stores/Auth'
+import {redirect} from 'next/navigation'
 
 
-async function Settings() {
+
+async function Admin() {
     const supabase = createClient()
+    const {data: session} = await supabase.auth.getSession()
 
-    const {data} = await supabase.auth.getUser()
+    console.log(session)
 
-    // const tasks = useStore(store => store.data)
-
-    // useEffect(() => {
-    //      fetchData()
-    // }, [fetchData])
-
-    // if (!data) {
-    //     return <div>Loading...</div>;
-    // }
+    if(session.session === null) {
+        return redirect('/')
+    }
     
     return (
         <main className='w-full flex justify-center items-center relative'>
@@ -27,7 +23,6 @@ async function Settings() {
                 </div>
 
                 <div className='text-white flex mt-[10%]'>
-                    {/* <MobilDesign></MobilDesign> */}
                     <Mob></Mob>
                 </div>
             </div>
@@ -35,4 +30,4 @@ async function Settings() {
     )
 }
 
-export default Settings
+export default Admin

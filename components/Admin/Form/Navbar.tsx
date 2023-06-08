@@ -1,7 +1,9 @@
 'use client'
 import { useStore } from '@/stores/zustand'
+import clsx from 'clsx';
 
-export default function Navbar() {    
+export default function Navbar() {
+    const {linktire} = useStore()
     const linktierData = (e: any) => {
         useStore.setState({
             linktire: e
@@ -10,7 +12,7 @@ export default function Navbar() {
 
     return (
         <span>
-            <div 
+            <div
                 className='
                     rounded-xl
                     bg-[#222831]
@@ -22,15 +24,17 @@ export default function Navbar() {
                     mb-[20px]
                     flex
                     items-center
-                    gap-[25px]
+                    gap-[15px]
                     justify-center
                     mt-[100px]
                 '
             >
-                <div onClick={() => linktierData('entries')}>Entries</div>
-                <div onClick={() => linktierData('theme')}>Theme</div>
-                <div onClick={() => linktierData('profil')}>Profil</div>
-                <div onClick={() => linktierData('settings')}>Settings</div>
+                <button onClick={() => linktierData('entries')} className={clsx('active:bg-[#393E46] focus:bg-[#393E46] py-[3px] px-[15px] rounded',
+                        linktire === 'entries' && 'bg-[#393E46]'
+                )}>Entries</button>
+                <button onClick={() => linktierData('theme')} className='active:bg-[#393E46] focus:bg-[#393E46] py-[3px] px-[15px] rounded'>Theme</button>
+                <button onClick={() => linktierData('profil')} className='active:bg-[#393E46] focus:bg-[#393E46] py-[3px] px-[15px] rounded'>Profil</button>
+                <button onClick={() => linktierData('settings')} className='active:bg-[#393E46] focus:bg-[#393E46] py-[3px] px-[15px] rounded'>Settings</button>
             </div>
         </span>
   )
