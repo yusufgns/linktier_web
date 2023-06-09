@@ -3,7 +3,8 @@
 	import { ReactQueryProvider } from './ReactProvider'
 	import SupabaseProvider from '@/components/providers/supabase-provider'
 	import supabase from '@/lib/supabase-client'
-	import Cart from '@/components/Cart'
+	import Cart from '@/components/CartMenu/Cart'
+	
 
 	export default function RootLayout({children}: {children: React.ReactNode}) {
 		return (

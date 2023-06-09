@@ -4,9 +4,9 @@ import supabase from '../lib/supabase-client';
 const store = (set: any): any => ({
     session: {},
 
-    supabaseUsers: async () => {
-        const { data } = await supabase.auth.getSession()
-        set({session: data})
+    supabaseUserOut: async () => {
+        const { error } = await supabase.auth.signOut()
+        set({session: error})
     }
 });
 

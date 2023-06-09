@@ -107,19 +107,19 @@ const store = (set: any): Store => ({
 
         set({ 
             useUsers: supaUser,
-            bg_color: supaUser[0].theme.bg_color,
-            comp_color: supaUser[0].theme.comp_color,
-            text_color: supaUser[0].theme.text_color,
-            completing_color: supaUser[0].theme.completing_color,
-            situation_color: supaUser[0].theme.situation_color,
-            overdue_color: supaUser[0].theme.overdue_color,
-            bio: supaUser[0].bio,
-            user_lastname: supaUser[0].user_lastname,
-            user_firstname: supaUser[0].user_firstname,
-            user_name: supaUser[0].user_name,
-            avatar_url: supaUser[0].avatar_url,
+            bg_color: supaUser[0]?.theme.bg_color,
+            comp_color: supaUser[0]?.theme.comp_color,
+            text_color: supaUser[0]?.theme.text_color,
+            completing_color: supaUser[0]?.theme.completing_color,
+            situation_color: supaUser[0]?.theme.situation_color,
+            overdue_color: supaUser[0]?.theme.overdue_color,
+            bio: supaUser[0]?.bio,
+            user_lastname: supaUser[0]?.user_lastname,
+            user_firstname: supaUser[0]?.user_firstname,
+            user_name: supaUser[0]?.user_name,
+            avatar_url: supaUser[0]?.avatar_url,
             
-            linkData: supaUser[0].bio_links,
+            linkData: supaUser[0]?.bio_links,
         });
     },
 });

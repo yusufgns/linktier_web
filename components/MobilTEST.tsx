@@ -13,8 +13,6 @@ import { useEntries } from '../stores/StoreEntries'
 export default function Mobil(): any {
     const { EntriesData } = useEntries()
 
-    console.log(EntriesData)
-
     const { bg_color, comp_color, text_color } = useStore(); // Include all the required state variables
     const [stores, setStores] = useState < any > ([]);
 

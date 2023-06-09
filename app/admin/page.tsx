@@ -4,15 +4,12 @@ import { createClient } from '@/lib/supabase-server'
 import {redirect} from 'next/navigation'
 
 
-
 async function Admin() {
     const supabase = createClient()
     const {data: session} = await supabase.auth.getSession()
 
-    console.log(session)
-
-    if(session.session === null) {
-        return redirect('/')
+     if(session.session === null) {
+         return redirect('/auth')
     }
     
     return (

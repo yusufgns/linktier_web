@@ -8,18 +8,12 @@ import Navbar from './Navbar'
 import { useStore } from '@/stores/zustand'
 import { useUser } from '@/stores/User'
 import { useMobil } from '@/stores/Mobil'
-import { useAuth } from '../../../stores/Auth'
 import {redirect} from 'next/navigation'
 import Settings from './Settings'
 
 
 export default function FormUpdate() {
-    const {session} = useAuth();
     const {linktire} = useStore();
-
-    if(!session) {
-        redirect('/')
-    }
 
     useEffect(() => {
         useMobil.getState().supabaseEntries()

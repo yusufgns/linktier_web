@@ -8,7 +8,7 @@ const Auth = async () => {
     const {data: session} = await supabase.auth.getSession()
 
     if(session.session) {
-        return redirect('/admin')
+      return redirect('/admin')
     }
 
   return (

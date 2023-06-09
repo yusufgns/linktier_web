@@ -4,16 +4,12 @@ import Link from 'next/link'
 import {BsGlobe2, BsTwitter, BsYoutube, BsInstagram, BsDribbble, BsBehance, BsGithub} from 'react-icons/bs'
 import { useUser } from '@/stores/User';
 import Avatars from '../../uı/Avatar'
-import { useAuth } from '@/stores/Auth';
 
 
 export default function Profil() {
     const {useUsers, text_color, user_lastname, user_firstname, user_name, bio, linkData, avatar_url} = useUser()
     const users: any = useUsers ? useUsers : [];
     const bio_links: any = linkData ? linkData : {};
-    
-    const auth: any = useAuth.getState().session
-    let url: any = auth?.session?.user?.user_metadata?.avatar_url
 
   return (
     <span>

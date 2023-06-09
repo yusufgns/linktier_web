@@ -11,8 +11,6 @@ const Situation: React.FC<SituationProps> = ({
 }) => {
   const {completing_color, overdue_color} = useUser()
 
-  console.log(completing_color)
-
   return (
     <div
       className={clsx(
