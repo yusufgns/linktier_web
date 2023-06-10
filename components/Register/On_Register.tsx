@@ -12,8 +12,9 @@ export default function On_Register({ users }: any) {
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [user_id, setUserID] = useState<any>(users[0].user_id);
+  const [user_id, setUserID] = useState<any>(users);
   const { selectedFile } = useFileStore() as any;
+
 
   const router = useRouter();
   const fileuid = uuidv4();
