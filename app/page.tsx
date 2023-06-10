@@ -9,7 +9,7 @@ import supabase from '@/lib/supabase-client';
 function Home() {
   const router = useRouter()
 
-  const AuthUser = async () => {
+  async function AuthUser() {
     const {data: session} = await supabase.auth.getSession()
     const {data: user} = await supabase.from('user').select('*').eq('user_id', session.session?.user.id)
 
@@ -22,7 +22,7 @@ function Home() {
   }
 
   useEffect(() => {
-    AuthUser
+    AuthUser()
   }, [])
 
   return (
