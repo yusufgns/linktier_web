@@ -8,11 +8,11 @@ import { v4 as uuidv4 } from 'uuid';
 import supabase from '@/lib/supabase-client';
 import { specialCharacterParse } from '../../helpres/parser';
 
-export default function On_Register({ session }: any) {
+export default function On_Register({ users }: any) {
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [user_id, setUserID] = useState<any>(session?.session.user.id);
+  const [user_id, setUserID] = useState<any>(users[0].user_id);
   const { selectedFile } = useFileStore() as any;
 
   const router = useRouter();

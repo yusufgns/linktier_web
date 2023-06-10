@@ -28,7 +28,7 @@ const Registry = async () => {
 
   return (
     <div className="flex items-center justify-center h-screen w-full">
-        <Forms session={session}></Forms>
+        <Forms session={users}></Forms>
     </div>
   );
 };
