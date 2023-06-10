@@ -14,6 +14,7 @@ function Home() {
     const {data: user} = await supabase.from('user').select('*').eq('user_id', session.session?.user.id)
 
     if(Object.keys(user as object).length === 0) {
+      console.log('aaaa')
       router.push('/auth/registry')
     } else {
       router.push('/admin')

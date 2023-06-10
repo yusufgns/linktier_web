@@ -12,7 +12,11 @@ const Registry = async () => {
 
     if(Object.keys(authUser as object).length !== 0 && users[0]?.user_name) {
       redirect('/admin')
-  }
+    }
+
+    if(session.session === null) {
+      redirect('/auth')
+    }
 
       
 
