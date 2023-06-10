@@ -21,7 +21,7 @@ function Home() {
   }
 
   useEffect(() => {
-    AuthUser()
+    AuthUser
   }, [])
 
   return (
