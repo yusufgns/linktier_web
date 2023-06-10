@@ -6,20 +6,23 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import supabase from '@/lib/supabase-client';
 
-async function Home() {
+function Home() {
   const router = useRouter()
 
-  const {data: session} = await supabase.auth.getSession()
+  const AuthUser = async () => {
+    const {data: session} = await supabase.auth.getSession()
+    const {data: user} = await supabase.from('user').select('*').eq('user_id', session.session?.user.id)
 
-  if(session.session === null) {
-      router.push('/auth')
-  } else if(session.session !== null) {
-      const {data} = await supabase.from('user').select('*').eq('user_id', session?.session?.user?.id)
-      const datas = data ? data[0]: ''
-      if(datas ===  undefined) {
-        router.push ('/auth/registry')
-      }
+    if(Object.keys(user as object).length === 0) {
+      router.push('/')
+    } else {
+      router.push('/admin')
+    }
   }
+
+  useEffect(() => {
+    AuthUser()
+  }, [])
 
   return (
     <main 

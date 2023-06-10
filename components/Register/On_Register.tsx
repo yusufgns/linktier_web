@@ -12,12 +12,8 @@ export default function On_Register({ session }: any) {
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [user_id, setUserID] = useState<any>(null);
+  const [user_id, setUserID] = useState<any>(session?.session.user.id);
   const { selectedFile } = useFileStore() as any;
-
-  useEffect(() => {
-    setUserID(session.session.user.id);
-  }, []);
 
   const router = useRouter();
   const fileuid = uuidv4();
