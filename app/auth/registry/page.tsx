@@ -19,7 +19,7 @@ const Registry = async () => {
         // }
         const users: any = authUser ? authUser: []
 
-        if(Object.keys(authUser as object).length !== 0 && users[0]?.user_name && users[0]?.user_id && users[0]?.user_firstname) {
+        if(Object.keys(authUser as object).length !== 0 && users[0]?.user_name) {
             redirect('/admin')
         }
       }

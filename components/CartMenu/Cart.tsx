@@ -49,6 +49,8 @@ function Cart() {
       const { error } = await supabases.auth.signOut()
       useAuth.getState().supabaseUserOut();
       setSessionData(error)
+
+      return router.push('/auth')
   }
 
   return (

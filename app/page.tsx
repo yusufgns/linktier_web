@@ -1,12 +1,26 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link';
 import { BsArrowRight } from 'react-icons/bs';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import supabase from '@/lib/supabase-client';
 
-function Home() {
+async function Home() {
   const router = useRouter()
+
+  const {data: session} = await supabase.auth.getSession()
+
+  if(session.session === null) {
+      router.push('/auth')
+  } else if(session.session !== null) {
+      const {data} = await supabase.from('user').select('*').eq('user_id', session?.session?.user?.id)
+      const datas = data ? data[0]: ''
+      if(datas ===  undefined) {
+        router.push ('/auth/registry')
+      }
+  }
+
   return (
     <main 
     className="
