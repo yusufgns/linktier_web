@@ -5,25 +5,25 @@ import TextArea from '@/components/uı/TextArea';
 import Situation from '@/components/uı/Situations';
 import { BsGlobe2 } from 'react-icons/bs';
 import supabase from '@/lib/supabase-client';
-import { useEntries } from '../../../stores/StoreEntries';
 import { useMobil } from '../../../stores/Mobil';
 import {useRouter} from 'next/navigation'
+import { useUser } from '@/stores/User';
 
 export default function EntriesSendData() {
   const router = useRouter()
-  const { EntriesData: EntryData } = useEntries();
+  const { EntriesData: EntryData } = useMobil();
+
+  const {user_id, user_name} = useUser();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [website, setWebSite] = useState('');
   const [type, setType] = useState('Empty');
-  const [user_id, setUserID] = useState('12108e77-baa6-44dc-8d6c-f998e4b98973');
-  const [user_name, setUserName] = useState('yusufgunes');
 
   const currentDate: any = new Date();
   const date = currentDate.toISOString().split('T')[0];
   const time = currentDate.toTimeString().split(' ')[0];
-  const userName: string = user_name;
+  const userName: string | undefined = user_name;
   const uniqueId = `${date}_${time}_${userName}`;
 
   const entriesSendData = async (e: React.FormEvent) => {
@@ -44,7 +44,7 @@ export default function EntriesSendData() {
       .update({
         EntriesData: updatedData
       })
-      .eq('user_id', '12108e77-baa6-44dc-8d6c-f998e4b98973');
+      .eq('user_id', user_id);
 
     if (error) {
       console.log(error);
@@ -84,7 +84,7 @@ export default function EntriesSendData() {
           <div className='w-full'>
             <Input
               type={'entires'}
-              length={33}
+              length={22}
               placeholder='Title'
               value={title}
               onChange={(e: any) => setTitle(e.target.value)}

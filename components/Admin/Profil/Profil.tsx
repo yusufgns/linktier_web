@@ -13,7 +13,7 @@ export default function Profil() {
 
   return (
     <span>
-        {users[0]?.user_lastname && users[0]?.user_firstname && users[0]?.user_name &&
+        { users[0]?.user_firstname && users[0]?.user_name &&
         <div>
             <div 
             className='
@@ -24,7 +24,8 @@ export default function Profil() {
             style={{color: `${text_color}`}}
             >
             <div className='flex gap-4 items-center'>
-            <Avatars variant='header'></Avatars>
+                {users[0]?.avatar_url && <Avatars variant='header'></Avatars>}
+                {users[0]?.avatar_url === null && <div className='w-[50px] h-[50px] bg-yellow-500 rounded-full'></div>}
                 <div>
                 <h1 className='font-medium'>{user_firstname} {user_lastname}</h1>
                 <p className='mt-1 opacity-70 font-medium text-[12px]'>@{user_name}</p>

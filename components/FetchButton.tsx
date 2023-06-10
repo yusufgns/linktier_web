@@ -2,6 +2,7 @@
 import supabase from "@/lib/supabase-client"
 import { useUser } from '../stores/User'
 import { useStore } from '../stores/zustand'
+import {} from '../stores/Auth'
 
 
 export default function Situation({ stores }: any) {
@@ -17,16 +18,17 @@ export default function Situation({ stores }: any) {
     user_lastname,
     user_name,
     bio,
-    linkData
+    linkData,
+    user_id
     } = useUser()
 
     const updateData = async () => {
         const { data: upEntriesData, error: upEntriesError } = await supabase
             .from('entries')
             .update({
-                EntriesData: stores[0].EntriesData
+                EntriesData: stores[0]?.EntriesData
             })
-            .eq('user_id', '12108e77-baa6-44dc-8d6c-f998e4b98973')
+            .eq('user_id', user_id)
 
         const {data: upUserData, error: upUserError} = await supabase
             .from('user')
@@ -53,7 +55,7 @@ export default function Situation({ stores }: any) {
                     dribbble: linkData.dribbble,
                 }
             })
-            .eq('user_id', '12108e77-baa6-44dc-8d6c-f998e4b98973')
+            .eq('user_id', user_id)
         
         console.log(upUserData)
         console.log(upUserError)

@@ -1,18 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { BsDiscord, BsGoogle } from 'react-icons/bs'
 import supabase from '@/lib/supabase-client';
 
 export default function Auth() {
+  const [email, setEmail] = useState<any>()
   const router = useRouter()
-
-  async function deneme() {
-    const { data } = await supabase.auth.getSession()
-    if(data.session !== null) {
-      router.push('/admin')
-    }
-  }
 
   function getUrl() {
     let url =
@@ -29,6 +23,8 @@ export default function Auth() {
       },
     });
   }
+  
+
   return (
     <div className="flex items-center flex-col gap-[10px] justify-center w-[250px]">
         <button
@@ -42,17 +38,29 @@ export default function Auth() {
             items-center 
             gap-4 
             font-medium 
-            rounded-sm"
-        >
+            rounded-sm
+            justify-center">
           <BsGoogle></BsGoogle>
           Login Google
         </button>
 
-        <div className="bg-white w-[250px] px-[25px] py-[9px] flex items-center gap-4 font-medium rounded-sm">
+        <div 
+        className="
+        bg-white 
+        w-[250px] 
+        px-[25px] 
+        py-[9px]
+        flex
+        items-center 
+        gap-4 
+        font-medium 
+        rounded-sm
+        opacity-10
+        justify-center">
           <BsDiscord></BsDiscord>
           Login Discord
         </div>
-
+{/* 
         <div className="relative h-[2px] flex justify-center">
           <div className="h-[2px] w-[250px] my-[16px] bg-white"></div>
           <div className="absolute text-white top-[3px] bg-[#191F26] w-fit px-[5px]">or</div>
@@ -60,12 +68,12 @@ export default function Auth() {
 
         <div className="flex flex-col mt-[25px]">
           <label className="mb-[2px] font-medium text-white">Email</label>
-          <input type="email" className="w-[250px] h-[35px] rounded-sm px-[7px] py-[2px]" placeholder="email@example.com" />
+          <input type="email" className="w-[250px] h-[35px] rounded-sm px-[7px] py-[2px]" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
 
         <div>
-          <div className="bg-slate-800 text-white font-medium py-[3px] px-[15px] rounded mt-[10px]">Email Login</div>
-        </div>
+          <div className="bg-slate-800 text-white font-medium py-[3px] px-[15px] rounded mt-[10px]" onClick={signInWithEmail}>Email Login</div>
+        </div> */}
     </div>
   )
 }

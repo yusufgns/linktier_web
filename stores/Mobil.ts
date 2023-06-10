@@ -1,8 +1,10 @@
 import { create } from 'zustand';
 import supabase from '../lib/supabase-client';
 import { UserType } from '../types/user';
+import { useUser } from './User';
 
 interface Entry {
+    EntriesData: any;
     id: string;
     title: string;
     description: string;
@@ -19,11 +21,13 @@ interface Store {
 const store = (set: any): Store => ({
     setEntriesData: (data: Entry[]) => set({ EntriesData: data }),
     EntriesData: [],
+
     supabaseEntries: async () => {
+        const { data } = await supabase.auth.getSession();
         const { data: Entries } = await supabase
             .from('entries')
             .select('*')
-            .eq('user_id', '12108e77-baa6-44dc-8d6c-f998e4b98973');
+            .eq('user_id', data.session?.user.id);
 
         const supaEntries: any = Entries
             ? Entries.map((e: any) => ({

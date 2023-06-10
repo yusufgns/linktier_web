@@ -47,6 +47,7 @@ interface Store {
     user_firstname?: string | undefined;
     user_name?: string | undefined;
     avatar_url?: string | undefined;
+    user_id?: string | undefined;
 }
 
 const store = (set: any): Store => ({
@@ -83,9 +84,10 @@ const store = (set: any): Store => ({
     user_firstname: '',
     user_name: '',
     avatar_url: '',
+    user_id: '',
 
     supabaseUsers: async () => {
-        const { data: userID } = await supabase.auth.getUser()
+        const { data: userID } = await supabase.auth.getUser();
         
         const { data: User } = await supabase
             .from('user')
@@ -106,6 +108,7 @@ const store = (set: any): Store => ({
             })): {};
 
         set({ 
+            user_id: supaUser[0]?.user_id,
             useUsers: supaUser,
             bg_color: supaUser[0]?.theme.bg_color,
             comp_color: supaUser[0]?.theme.comp_color,

@@ -1,6 +1,7 @@
 import {create} from 'zustand'
 import supabase from '../lib/supabase-client'
 
+
 interface linDataI {
     website: string | null,
     instagram: string | null,

@@ -12,21 +12,19 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 
 function Cart() {
   const [supabases] = useState(() => createBrowserSupabaseClient())
-  const [sessionData, setSessionData] = useState(null)
-  const {session} = useAuth()
+  const [sessionData, setSessionData] = useState<any>()
+  const {useUsers} = useUser()
+  const users: any = useUsers ? useUsers : [];
 
   const router = useRouter()
   const [menu, setMenu] = useState(false);
 
   const { avatar_url } = useUser();
   const menuRef = useRef<HTMLButtonElement | null>(null);
-  let url: any = 'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/' + `${avatar_url}`
+  let url: any = 'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/' + `${avatar_url}`;
 
   useEffect(() => {
     useUser.getState().supabaseUsers();
-
-    sessionAuth()
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -50,50 +48,51 @@ function Cart() {
   async function goBack() {
       const { error } = await supabases.auth.signOut()
       useAuth.getState().supabaseUserOut();
-  }
-
-  async function sessionAuth() {
-      const {data: session} = await supabases.auth.getSession()
-      const sData = session.session as any
-      setSessionData(sData)
+      setSessionData(error)
   }
 
   return (
     <>
-    {sessionData !== null &&
-      <button
-        onClick={openMenu}
-        ref={menuRef}
-        className={clsx('absolute right-10 bottom-10 w-fit px-[10px] py-[10px] bg-[#222831] text-white font-medium rounded-full transition duration-1000 ease-in-out',
-        menu === true && 'translate-y-1'
-      )}>
+      {users[0]?.user_id && sessionData !== null &&
+        <button
+          onClick={openMenu}
+          ref={menuRef}
+          className={clsx('absolute right-10 bottom-10 w-fit px-[10px] py-[10px] bg-[#222831] text-white font-medium rounded-full transition duration-1000 ease-in-out',
+          menu === true && 'translate-y-1'
+        )}>
 
-      {menu &&
-      <div className={clsx(menu === true && 'transition duration-500 ease-in-out', 'mb-[20px] flex items-center flex-col gap-[25px]')}>
+        {menu &&
+        <div className={clsx(menu === true && 'transition duration-500 ease-in-out', 'mb-[20px] flex items-center flex-col gap-[25px]')}>
 
-        <button className='text-[20px] mt-[10px]' onClick={() => router.push('/')}>
-          <AiFillHome></AiFillHome>
-        </button>
+          <button className='text-[20px] mt-[10px]' onClick={() => router.prefetch('/')}>
+            <AiFillHome></AiFillHome>
+          </button>
 
-        <button className='text-[20px]' onClick={() => router.push('/admin')}>
-          <AiFillEdit></AiFillEdit>
-        </button>
+          <button className='text-[20px]' onClick={() => router.prefetch('/admin')}>
+            <AiFillEdit></AiFillEdit>
+          </button>
 
-        <button className='text-[20px]'>
-          <CgProfile></CgProfile>
-        </button>
+          <button className='text-[20px]'>
+            <CgProfile></CgProfile>
+          </button>
 
-        <button className='text-[20px]' onClick={goBack}>
-          <FiLogOut></FiLogOut>
-        </button>
-      </div>
-      }
-
-        <div>
-          <Image src={url} alt='' width={50} height={50} className='rounded-full w-[50px] h-[50px]' />
+          <button className='text-[20px]' onClick={goBack}>
+            <FiLogOut></FiLogOut>
+          </button>
         </div>
-      </button>
-    }
+        }
+
+          <div>
+            {url !== 'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/null' &&
+              <Image src={url} alt='' width={50} height={50} className='rounded-full w-[50px] h-[50px]' />
+            }
+
+            {url == 'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/null' &&
+              <div className='w-[50px] h-[50px] bg-yellow-500 rounded-full'></div>
+            }
+          </div>
+        </button>
+      }
     </>
   );
 }

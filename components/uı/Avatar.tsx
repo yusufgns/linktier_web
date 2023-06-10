@@ -14,15 +14,16 @@ const Situation: React.FC<Situation> = ({
 }) => {
     const {useUsers, avatar_url} = useUser()
     const users: any = useUsers ? useUsers : [];
+
     return (
         <Image
             src={'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/' + `${avatar_url}`}
             alt=""
-            width={100}
-            height={100}
+            width={50}
+            height={50}
             className={clsx('rounded-full bg-white',
                 variant === 'avatar' && 'bg-blue-500 w-[40px] h-[40px]',
-                variant === 'header' && 'bg-yellow-500 w-[65px] h-[65px]',
+                variant === 'header' && 'bg-yellow-500 w-[50] h-[50px]',
             )}
         ></Image>
     )

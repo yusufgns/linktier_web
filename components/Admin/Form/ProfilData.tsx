@@ -3,13 +3,10 @@ import React, {useState} from 'react'
 import TextArea from '@/components/uı/TextArea'
 import {useUser} from '@/stores/User'
 import Input from '@/components/uı/Input'
-import {useFileStore} from '@/stores/SelectFile'
 
 export default function ProfilSendData() {
     const {useUsers, setLastName, setFirstName, setUserName, setBio, user_firstname, user_lastname, bio, avatar_url, setAvatarUrl} = useUser()
-    const {selectedFile, previewImage} = useFileStore()
-
-    const users: any = useUsers ? useUsers : [];
+    
     const [ifirstname, setInputFirstName] = useState(user_firstname)
     const [ilastname, setInputLastName] = useState(user_lastname)
     const [iavatar, setInputAvatar] = useState(avatar_url)
