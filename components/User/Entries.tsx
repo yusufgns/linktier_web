@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function Entries({ entries, theme }: any) {
     return (
         <>
-            <div className='w-[650px]'>
+            <div className='w-[550px]'>
                 {entries.map((e: any) => (
                     e.EntriesData.map((entry: any) => (
                         <div key={entry.id}>

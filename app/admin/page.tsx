@@ -23,9 +23,11 @@ async function Admin() {
                 <div className='text-white flex mt-[10%]'>
                     <Mob></Mob>
                 </div>
-                <div className='text-white flex justify-center items-center h-screen'>
-                    <On_Register session={session}></On_Register>
-                </div>
+                {session.session &&
+                    <div className='text-white flex justify-center items-center h-screen'>
+                        <On_Register session={session}></On_Register>
+                    </div>
+                }
             </div>
         </main>
     )

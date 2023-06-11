@@ -16,7 +16,7 @@ export default function Profil({userData}: any) {
 
     return (
         <>
-            <section className='h-fit w-[650px] py-[15px]' style={{color: `${themes.text_color}`}}>
+            <section className='h-fit w-[550px] py-[15px]' style={{color: `${themes.text_color}`}}>
                 <div>
                     <div
                         className='

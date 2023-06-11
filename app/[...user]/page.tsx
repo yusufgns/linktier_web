@@ -29,7 +29,7 @@ export default async function page({ params }: any) {
   return (
     <main className='flex flex-col items-center h-screen w-full' style={{ background: `${theme.bg_color}` }}>
       <Profil userData={userData} />
-        <Entries theme={theme} entries={entries}></Entries>
+      <Entries theme={theme} entries={entries}></Entries>
     </main>
   )
 }
