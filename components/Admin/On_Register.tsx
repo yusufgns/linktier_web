@@ -10,14 +10,19 @@ import supabase from '@/lib/supabase-client';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { useAuth } from '../../stores/Auth';
 import { FiLogOut } from 'react-icons/fi'
+import { useUser } from '@/stores/User';
 
-export default function On_Register({ users }: any) {
+export default function On_Register({ session }: any) {
   const [supabases] = useState(() => createBrowserSupabaseClient())
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [user_id, setUserID] = useState<any>(users);
   const { selectedFile } = useFileStore() as any;
+  const users_id = session ? session.session.user.id : ''
+
+  const {user_name} = useUser()
+
+
 
 
   const router = useRouter();
@@ -49,7 +54,7 @@ export default function On_Register({ users }: any) {
           dribbble: '',
           instagram: '',
         },
-        user_id: user_id,
+        user_id: users_id,
       },
     ]);
 
@@ -57,6 +62,7 @@ export default function On_Register({ users }: any) {
       console.log('ERROR', error);
     } else {
       console.log(data);
+      router.push('/')
     }
 
     if (selectedFile) {
@@ -85,57 +91,61 @@ export default function On_Register({ users }: any) {
   }
 
   return (
-
-    <div className="text-white gap-[20px] w-[300px] relative">
-      <button className='text-[20px] absolute bg-[#393E46] p-2 rounded-lg right-0 top-[-38px]' onClick={goBack}>
-        <FiLogOut></FiLogOut>
-      </button>
-        <main className="flex items-center gap-[15px] mb-[15px]">
-          <UploadAvatar />
-        </main>
-      <form className="text-white gap-[20px] w-[300px] relative">
-
-        <section>
-          <div>
-            <label className='flex items-center gap-1 text-[14px]'>User Name<p className='text-red-500'>*</p></label>
-            <Input
-              type="form"
-              length={22}
-              placeholder="@linktier"
-              value={userName}
-              onChange={(e: any) => setUsernameVal(e.target.value)}
-            />
-          </div>
-
-          <div className='my-[15px]'>
-            <label className='flex items-center gap-1 text-[14px]'>First Name<p className='text-red-500'>*</p></label>
-            <Input
-              type="form"
-              length={22}
-              placeholder="First Name"
-              value={firstName}
-              onChange={(e: any) => setFirstName(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label className='flex items-center gap-1 text-[14px]'>Last Name<p className='text-red-500'>*</p></label>
-            <Input
-              type="edit"
-              length={22}
-              placeholder="Last Name"
-              value={lastName}
-              onChange={(e: any) => setLastName(e.target.value)}
-            />
-          </div>
-        </section>
-
-        <div className="w-full text-end mt-[15px]">
-          <button className="bg-[#393E46] w-fit px-[25px] py-[5px] rounded" onClick={handleSendData}>
-            Save
+    <>
+      {users_id && !user_name &&
+        <div className="text-white gap-[20px] w-[300px] relative">
+          <button className='text-[20px] absolute bg-[#393E46] p-2 rounded-lg right-0 top-[-38px]' onClick={goBack}>
+            <FiLogOut></FiLogOut>
           </button>
+          <main className="flex items-center gap-[15px] mb-[15px]">
+            <UploadAvatar />
+          </main>
+          <form className="text-white gap-[20px] w-[300px] relative">
+
+            <section>
+              <div>
+                <label className='flex items-center gap-1 text-[14px]'>User Name<p className='text-red-500'>*</p></label>
+                <Input
+                  type="form"
+                  length={22}
+                  placeholder="@linktier"
+                  value={userName}
+                  onChange={(e: any) => setUsernameVal(e.target.value)}
+                />
+              </div>
+
+              <div className='my-[15px]'>
+                <label className='flex items-center gap-1 text-[14px]'>First Name<p className='text-red-500'>*</p></label>
+                <Input
+                  type="form"
+                  length={22}
+                  placeholder="First Name"
+
+                  value={firstName}
+                  onChange={(e: any) => setFirstName(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className='flex items-center gap-1 text-[14px]'>Last Name</label>
+                <Input
+                  type="form2"
+                  length={22}
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChange={(e: any) => setLastName(e.target.value)}
+                />
+              </div>
+            </section>
+
+            <div className="w-full text-end mt-[15px]">
+              <button className="bg-[#393E46] w-fit px-[25px] py-[5px] rounded" onClick={handleSendData}>
+                Save
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      }
+    </>
   )
 }

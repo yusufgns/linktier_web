@@ -20,7 +20,7 @@ const Inputs: React.FC<InputsI> = ({
 }: InputsI) => {
     return (
         <span>
-            {type !== 'website' && type !== 'form' && type !== 'entires' && type !== 'edit' &&
+            {type !== 'website' && type !== 'form' && type !== 'entires' && type !== 'edit' && type !== 'form2' &&
                 <input
                     maxLength={length}
                     placeholder={placeholder}
@@ -74,6 +74,24 @@ const Inputs: React.FC<InputsI> = ({
                     value={value}
                     minLength={1}
                     required
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                        }
+                    }}
+                    className={clsx(
+                        'invalid:border-red-500 outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
+                    )}
+                />
+            }
+
+            {type === 'form2' &&
+                <input
+                    maxLength={length}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    type="text"
+                    value={value}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                             e.preventDefault();

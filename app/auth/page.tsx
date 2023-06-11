@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase-server';
 import Auths from '@/components/Auth';
-import On_Register from '@/components/Register/On_Register';
+import On_Register from '@/components/Admin/On_Register';
 
 const Auth = async () => {
   const supabase = createClient()
@@ -11,10 +11,7 @@ const Auth = async () => {
   const auths: any = authUser ? authUser : ''
 
   if(session.session) {
-    const {data: user} = await supabase.from('user').select('*').eq('user_id', session?.session?.user?.id)
-    if(user) {
-      redirect('/admin')
-    }
+    redirect('/admin')
   }
   
   return (

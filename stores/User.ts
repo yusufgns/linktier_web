@@ -88,6 +88,8 @@ const store = (set: any): Store => ({
 
     supabaseUsers: async () => {
         const { data: userID } = await supabase.auth.getUser();
+
+        set({user_id: userID.user?.id})
         
         const { data: User } = await supabase
             .from('user')
@@ -107,8 +109,7 @@ const store = (set: any): Store => ({
                 bio_links: e.bio_links,
             })): {};
 
-        set({ 
-            user_id: supaUser[0]?.user_id,
+        set({
             useUsers: supaUser,
             bg_color: supaUser[0]?.theme.bg_color,
             comp_color: supaUser[0]?.theme.comp_color,
