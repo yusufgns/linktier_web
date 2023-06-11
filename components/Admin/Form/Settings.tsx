@@ -10,7 +10,15 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function ProfilSendData() {
     const {setUserName, setAvatarUrl, user_name} = useUser()
-    const {selectedFile} = useFileStore() as any
+    const { 
+        selectedFile,
+        previewImage,
+        isHovered,
+        setSelectedFile,
+        setPreviewImage,
+        setIsHovered,
+        currentUser
+    } = useFileStore() as any
 
     const router = useRouter()
     const {user_id} = useUser()
@@ -58,9 +66,11 @@ export default function ProfilSendData() {
 
         router.refresh()
     };
+
+
     return (
         <span>
-            <form
+            <div
                 className='
                 rounded-xl
                 bg-[#222831]
@@ -79,7 +89,7 @@ export default function ProfilSendData() {
                         className='bg-[#393E46] text-white font-medium px-[10px] py-[2px] rounded text-[15px] hover:bg-opacity-40 cursor-pointer outline-none'
                         >Update Profil</button>
                     </div>
-            </form>
+            </div>
         </span>
     )
 }

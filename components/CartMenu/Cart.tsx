@@ -66,11 +66,11 @@ function Cart() {
         {menu &&
         <div className={clsx(menu === true && 'transition duration-500 ease-in-out', 'mb-[20px] flex items-center flex-col gap-[25px]')}>
 
-          <button className='text-[20px] mt-[10px]' onClick={() => router.prefetch('/')}>
+          <button className='text-[20px] mt-[10px]' onClick={() => router.push('/home')}>
             <AiFillHome></AiFillHome>
           </button>
 
-          <button className='text-[20px]' onClick={() => router.prefetch('/admin')}>
+          <button className='text-[20px]' onClick={() => router.push('/admin')}>
             <AiFillEdit></AiFillEdit>
           </button>
 

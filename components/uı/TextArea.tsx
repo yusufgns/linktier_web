@@ -17,26 +17,26 @@ const TextArea: React.FC<TextAreaI> = ({
 }) => {
     return (
         <span>
-            {type === 'des' && 
+            {type === 'des' &&
                 <textarea maxLength={length}
-                onChange={onChange}
-                placeholder="Description"
-                value={value}
-                className={clsx(
-                    'outline-none mt-[10px] bg-[#393E46]',
-                    type === 'des' && 'w-[610px] h-[100px] min-h-[100px] max-h-[100px] p-[10px] rounded'
-                )}/>
+                    onChange={onChange}
+                    placeholder="Description"
+                    value={value}
+                    className={clsx(
+                        'outline-none mt-[10px] bg-[#393E46]',
+                        type === 'des' && 'w-[610px] h-[100px] min-h-[100px] max-h-[100px] p-[10px] rounded'
+                    )} />
             }
 
-            {type === 'bio' && 
+            {type === 'bio' &&
                 <textarea maxLength={length}
-                onChange={onChange}
-                placeholder="Biography"
-                value={value}
-                className={clsx(
-                    'outline-none mt-[10px] bg-[#393E46]',
-                    type === 'bio' && 'w-[610px] h-[100px] min-h-[100px] max-h-[100px] p-[10px] rounded',
-                )} required/>
+                    onChange={onChange}
+                    placeholder="Biography"
+                    value={value}
+                    className={clsx(
+                        'outline-none mt-[10px] bg-[#393E46]',
+                        type === 'bio' && 'w-[610px] h-[100px] min-h-[100px] max-h-[100px] p-[10px] rounded',
+                    )} required />
             }
         </span>
     )

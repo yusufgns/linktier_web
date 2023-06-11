@@ -2,7 +2,7 @@ import React from "react"
 import clsx from 'clsx'
 
 interface InputsI {
-    type: 'title' | 'username' | 'edit' | 'website' | 'entires' | 'form' |string | null,
+    type: 'title' | 'username' | 'edit' | 'website' | 'entires' | 'form' | string | null,
     placeholder: 'Full Name' | 'Web Site' | 'Link' | string,
     length: number | undefined,
     onChange: (e: any) => any,
@@ -20,106 +20,106 @@ const Inputs: React.FC<InputsI> = ({
 }: InputsI) => {
     return (
         <span>
-            {type !== 'website'  && type !== 'form' && type !== 'entires' && type !== 'edit' &&
+            {type !== 'website' && type !== 'form' && type !== 'entires' && type !== 'edit' &&
                 <input
-                maxLength={length}
-                placeholder={placeholder}
-                onChange={onChange}
-                onClick={onClick}
-                type="text"
-                value={value}
-                required
-                minLength={1}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                    e.preventDefault();
-                    }
-                }}
-                className={clsx(
-                    'h-[30px] outline-none focus:bg-[#393E46] bg-[#393E46]',
-                    type === 'username' && 'w-[165px]',
-                    type === 'edit' && 'w-[190px] h-[45px]  rounded px-[15px]',
-                    type === 'title' && 'w-full h-[45px]  rounded px-[15px]',
-                    type === 'links' && 'w-full h-[25px]  rounded text-[14px] px-[5px]',
-                )}
+                    maxLength={length}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    onClick={onClick}
+                    type="text"
+                    value={value}
+                    required
+                    minLength={1}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                        }
+                    }}
+                    className={clsx(
+                        'h-[30px] outline-none focus:bg-[#393E46] bg-[#393E46]',
+                        type === 'username' && 'w-[165px]',
+                        type === 'edit' && 'w-[190px] h-[45px]  rounded px-[15px]',
+                        type === 'title' && 'w-full h-[45px]  rounded px-[15px]',
+                        type === 'links' && 'w-full h-[25px]  rounded text-[14px] px-[5px]',
+                    )}
                 />
             }
 
-            {type === 'entires' && 
+            {type === 'entires' &&
                 <input
-                maxLength={length}
-                placeholder={placeholder}
-                onChange={onChange}
-                type="text"
-                value={value}
-                minLength={1}
-                required
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                    e.preventDefault();
-                    }
-                }}
-                className={clsx(
-                    'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
-                )}
+                    maxLength={length}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    type="text"
+                    value={value}
+                    minLength={1}
+                    required
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                        }
+                    }}
+                    className={clsx(
+                        'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
+                    )}
                 />
             }
 
-            {type === 'form' && 
+            {type === 'form' &&
                 <input
-                maxLength={length}
-                placeholder={placeholder}
-                onChange={onChange}
-                type="text"
-                value={value}
-                minLength={1}
-                required
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                    e.preventDefault();
-                    }
-                }}
-                className={clsx(
-                    'invalid:border-red-500 outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
-                )}
+                    maxLength={length}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    type="text"
+                    value={value}
+                    minLength={1}
+                    required
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                        }
+                    }}
+                    className={clsx(
+                        'invalid:border-red-500 outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
+                    )}
                 />
             }
 
-            {type === 'edit' && 
+            {type === 'edit' &&
                 <input
-                maxLength={length}
-                placeholder={placeholder}
-                onChange={onChange}
-                type="text"
-                value={value}
-                minLength={1}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                    e.preventDefault();
-                    }
-                }}
-                className={clsx(
-                    'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
-                )}
+                    maxLength={length}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    type="text"
+                    value={value}
+                    minLength={1}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                        }
+                    }}
+                    className={clsx(
+                        'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
+                    )}
                 />
             }
 
-            {type === 'website' && 
+            {type === 'website' &&
                 <input
-                maxLength={length}
-                placeholder={placeholder}
-                onChange={onChange}
-                type="text"
-                value={value}
-                minLength={1}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                    e.preventDefault();
-                    }
-                }}
-                className={clsx(
-                    'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]',
-                )}
+                    maxLength={length}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    type="text"
+                    value={value}
+                    minLength={1}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                        }
+                    }}
+                    className={clsx(
+                        'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]',
+                    )}
                 />
             }
         </span>

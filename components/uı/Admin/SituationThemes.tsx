@@ -7,7 +7,7 @@ interface themesI {
     completing_c?: string | null,
 }
 
-const Themes: React.FC<themesI> = ({onClick, over_c, completing_c}: themesI) => {
+const Themes: React.FC<themesI> = ({ onClick, over_c, completing_c }: themesI) => {
     const style1 = over_c ? { backgroundColor: over_c } : {};
     const style2 = completing_c ? { backgroundColor: completing_c } : {};
 

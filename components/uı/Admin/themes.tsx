@@ -7,7 +7,7 @@ interface themesI {
     cp_c?: string | null,
 }
 
-const Themes: React.FC<themesI> = ({onClick, bg_c, cp_c}: themesI) => {
+const Themes: React.FC<themesI> = ({ onClick, bg_c, cp_c }: themesI) => {
     const style1 = bg_c ? { backgroundColor: bg_c } : {};
     const style2 = cp_c ? { backgroundColor: cp_c } : {};
 

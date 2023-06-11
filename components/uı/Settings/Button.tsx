@@ -15,11 +15,11 @@ const Input: React.FC<InputI> = ({
         `,
             type === 'edit' && 'bg-gray-700',
             type === 'change' && 'bg-gray-700'
-            
+
         )}>
             {type === 'edit' && 'Edit'}
             {type === 'change' && 'Change'}
-            
+
         </button>
     )
 }

@@ -4,7 +4,7 @@ import { useFileStore } from '../../stores/SelectFile';
 import supabase from '@/lib/supabase-client';
 import { useUser } from '../../stores/User';
 
-interface ProfilePictureProps {}
+interface ProfilePictureProps { }
 
 const ProfilePicture: React.FC<ProfilePictureProps> = () => {
   const {
@@ -16,6 +16,11 @@ const ProfilePicture: React.FC<ProfilePictureProps> = () => {
     setIsHovered,
     currentUser,
   } = useFileStore();
+
+  function onReset () {
+    setPreviewImage(null);
+    setSelectedFile(null)
+  }
 
   const handleFileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -45,33 +50,37 @@ const ProfilePicture: React.FC<ProfilePictureProps> = () => {
   };
 
   return (
-    <div
-      className="relative w-[70px] h-[70px] rounded-[50%]"
-      onMouseEnter={() => handleHover(true)}
-      onMouseLeave={() => handleHover(false)}
-    >
+
+    <>
+      <button className='text-[14px] bg-[#393E46] px-[9px] rounded h-fit pb-1' onClick={onReset}>x</button>
       <div
-        className={`absolute flex items-center justify-center h-[70px] w-[70px] ${
-          isHovered ? ' opacity-100' : 'bg-transparent opacity-100'
-        }`}
+        className="relative w-[70px] h-[70px] rounded-[50%] flex gap-1"
+        onMouseEnter={() => handleHover(true)}
+        onMouseLeave={() => handleHover(false)}
       >
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileInputChange}
-          className={`absolute bg-[#393E46] h-[70px] w-[70px] rounded-[50%] appearance-none opacity-0`}
-        />
+        <span>
+          <div
+            className={`absolute flex items-center justify-center h-[70px] w-[70px] ${isHovered ? ' opacity-100' : 'bg-transparent opacity-100'
+              }`}
+          >
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileInputChange}
+              className={`absolute bg-[#393E46] h-[70px] w-[70px] rounded-[50%] appearance-none opacity-0`}
+            />
 
-        <p
-          className={`text-[10px] text-white font-bold h-[70px] w-[70px] rounded-[50%] flex items-center justify-center 
+            <p
+              className={`text-[10px] text-white font-bold h-[70px] w-[70px] rounded-[50%] flex items-center justify-center 
           ${isHovered ? 'bg-[#393E46]' : 'opacity-0'}`}
-        >
-          DOSYA SEÇ
-        </p>
+            >
+              DOSYA SEÇ
+            </p>
+          </div>
+          {renderPreviewImage()}
+        </span>
       </div>
-
-      {renderPreviewImage()}
-    </div>
+    </>
   );
 };
 

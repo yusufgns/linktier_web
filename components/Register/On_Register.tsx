@@ -5,10 +5,14 @@ import UploadAvatar from '../uı/UploadAvatar';
 import { useFileStore } from '@/stores/SelectFile';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
-import supabase from '@/lib/supabase-client';
 import { specialCharacterParse } from '../../helpres/parser';
+import supabase from '@/lib/supabase-client';
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { useAuth } from '../../stores/Auth';
+import { FiLogOut } from 'react-icons/fi'
 
 export default function On_Register({ users }: any) {
+  const [supabases] = useState(() => createBrowserSupabaseClient())
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -73,46 +77,65 @@ export default function On_Register({ users }: any) {
     setUserName(username.replace(/[^a-zA-Z0-9 ]/, "").trim());
   }
 
+  async function goBack() {
+    const { error } = await supabases.auth.signOut()
+    useAuth.getState().supabaseUserOut();
+
+    return router.push('/auth')
+  }
+
   return (
-    <form className="text-white gap-[20px] w-[300px]">
-      <main className="flex items-center gap-[15px] mb-[15px]">
-        <UploadAvatar />
-        <Input
-          type="form"
-          length={22}
-          placeholder="@linktier"
-          value={userName}
-          onChange={(e: any) => setUsernameVal(e.target.value)}
-        />
-      </main>
 
-      <section>
-        <div>
-          <Input
-            type="form"
-            length={50}
-            placeholder="First Name"
-            value={firstName}
-            onChange={(e: any) => setFirstName(e.target.value)}
-          />
+    <div className="text-white gap-[20px] w-[300px] relative">
+      <button className='text-[20px] absolute bg-[#393E46] p-2 rounded-lg right-0 top-[-38px]' onClick={goBack}>
+        <FiLogOut></FiLogOut>
+      </button>
+        <main className="flex items-center gap-[15px] mb-[15px]">
+          <UploadAvatar />
+        </main>
+      <form className="text-white gap-[20px] w-[300px] relative">
+
+        <section>
+          <div>
+            <label className='flex items-center gap-1 text-[14px]'>User Name<p className='text-red-500'>*</p></label>
+            <Input
+              type="form"
+              length={22}
+              placeholder="@linktier"
+              value={userName}
+              onChange={(e: any) => setUsernameVal(e.target.value)}
+            />
+          </div>
+
+          <div className='my-[15px]'>
+            <label className='flex items-center gap-1 text-[14px]'>First Name<p className='text-red-500'>*</p></label>
+            <Input
+              type="form"
+              length={22}
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e: any) => setFirstName(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className='flex items-center gap-1 text-[14px]'>Last Name<p className='text-red-500'>*</p></label>
+            <Input
+              type="edit"
+              length={22}
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e: any) => setLastName(e.target.value)}
+            />
+          </div>
+        </section>
+
+        <div className="w-full text-end mt-[15px]">
+          <button className="bg-[#393E46] w-fit px-[25px] py-[5px] rounded" onClick={handleSendData}>
+            Save
+          </button>
         </div>
-
-        <div className="mt-[15px]">
-          <Input
-            type="edit"
-            length={50}
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e: any) => setLastName(e.target.value)}
-          />
-        </div>
-      </section>
-
-      <div className="w-full text-end mt-[15px]">
-        <button className="bg-[#393E46] w-fit px-[25px] py-[5px] rounded" onClick={handleSendData}>
-          Save
-        </button>
-      </div>
-    </form>
-  );
+      </form>
+    </div>
+  )
 }

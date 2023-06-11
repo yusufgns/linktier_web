@@ -7,7 +7,7 @@ interface SituationProps {
   overdue_color: string | null,
 }
 
-const Situation: React.FC<SituationProps> = ({type, completing_color, overdue_color}: SituationProps) => {
+const Situation: React.FC<SituationProps> = ({ type, completing_color, overdue_color }: SituationProps) => {
   return (
     <div
       className={clsx(

@@ -62,12 +62,6 @@ export interface Database {
             columns: ["user_id"]
             referencedRelation: "users"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "entries_user_name_fkey"
-            columns: ["user_name"]
-            referencedRelation: "user"
-            referencedColumns: ["user_name"]
           }
         ]
       }

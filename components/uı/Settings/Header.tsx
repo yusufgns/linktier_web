@@ -1,16 +1,16 @@
 
 'use client'
 import { useRouter } from "next/navigation"
-import {BsFillArrowLeftSquareFill} from 'react-icons/bs'
+import { BsFillArrowLeftSquareFill } from 'react-icons/bs'
 
 
- const SettingHeader = () => {
+const SettingHeader = () => {
     const router = useRouter()
 
     const handleRouter = () => {
         return router.push('/')
     }
-    
+
     return (
         <button onClick={() => handleRouter()} className="flex items-center gap-[10px] text-[28px]">
             <BsFillArrowLeftSquareFill />

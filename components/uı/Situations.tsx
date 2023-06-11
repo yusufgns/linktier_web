@@ -19,7 +19,7 @@ const Situation: React.FC<SituationI> = ({
     return (
         <select
             onChange={onChange}
-            name="origin" 
+            name="origin"
             required
             value={value}
             className="h-[30px] rounded-md text-center bg-[#393E46] text-white outline-none font-medium">
