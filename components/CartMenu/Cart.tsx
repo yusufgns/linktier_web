@@ -19,7 +19,7 @@ function Cart() {
   const router = useRouter()
   const [menu, setMenu] = useState(false);
 
-  const { avatar_url } = useUser();
+  const { avatar_url, user_id, user_name } = useUser();
   const menuRef = useRef<HTMLButtonElement | null>(null);
   let url: any = 'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/' + `${avatar_url}`;
 
@@ -70,13 +70,14 @@ function Cart() {
             <AiFillHome></AiFillHome>
           </button>
 
+          <button className='text-[20px]' onClick={() => router.push(`/${user_name}`)}>
+            <CgProfile></CgProfile>
+          </button>
+
           <button className='text-[20px]' onClick={() => router.push('/admin')}>
             <AiFillEdit></AiFillEdit>
           </button>
 
-          <button className='text-[20px]'>
-            <CgProfile></CgProfile>
-          </button>
 
           <button className='text-[20px]' onClick={goBack}>
             <FiLogOut></FiLogOut>

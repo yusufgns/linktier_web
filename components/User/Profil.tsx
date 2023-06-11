@@ -5,7 +5,6 @@ import Link from 'next/link'
 import Avatars from '../uı/Avatar'
 
 export default function Profil({userData}: any) {
-    console.log(userData)
     const themes = userData ? userData.theme : '';
     const bio_links = userData ? userData.bio_links : '';
     const avatar_url = userData ? userData.avatar_url : '';
@@ -14,11 +13,10 @@ export default function Profil({userData}: any) {
     const user_firstname = userData ? userData.user_firstname : '';
     const bio = userData ? userData.bio : '';
     
-    console.log(avatar_url)
 
     return (
         <>
-            <section className='h-screen w-[650px] py-[15px]' style={{color: `${themes.text_color}`}}>
+            <section className='h-fit w-[650px] py-[15px]' style={{color: `${themes.text_color}`}}>
                 <div>
                     <div
                         className='
@@ -40,7 +38,7 @@ export default function Profil({userData}: any) {
                     <div className='mb-2 break-words px-[5px]'>
                         <p className='text-[16px] mt-[15px]'>{bio}</p>
 
-                        <div className='w-full flex items-center justify-center pt-[10px] pb-[5px] gap-3 text-[14px]'>
+                        <div className='w-full flex items-center justify-center pt-[10px] pb-[5px] gap-3 text-[17px]'>
                             {bio_links.website !== '' && <Link href={bio_links.website} target='_blank'><BsGlobe2/></Link>}
                             {bio_links.twitter !== '' && <Link href={bio_links.twitter} target='_blank'><BsTwitter/></Link>}
                             {bio_links.youtube !== '' && <Link href={bio_links.youtube} target='_blank'><BsYoutube/></Link>}

@@ -11,7 +11,7 @@ const Situation: React.FC<SituationProps> = ({ type, completing_color, overdue_c
   return (
     <div
       className={clsx(
-        'text-[10px] text-center my-auto py-[2px] px-[10px] rounded font-medium',
+        'text-[10px] text-center my-auto py-[2px] px-[10px] rounded font-medium text-white',
         type === 'Completing' && `bg-[${completing_color}]`,
         type === 'Over Due' && `bg-[${overdue_color}]`,
 

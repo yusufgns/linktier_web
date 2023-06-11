@@ -97,7 +97,7 @@
                                                                 )}
 
                                                                 {e.website && (
-                                                                    <div className='relative flex items-center w-full'>
+                                                                    <div  className=' rounded-lg mt-[5px] mb-[5px] flex items-center relative' style={{ background: `${comp_color}` }}>
                                                                         <Link href={'https://www.' + e.website} target='_blank' className='w-full'>
                                                                         <div className='
                                                                         hover:opacity-50

@@ -14,22 +14,22 @@ export default async function page({ params }: any) {
   const theme: any = user ? userData?.theme : ''
 
   const { data: entries } = await supabase.from('entries').select('*').eq('user_name', userName)
-  const entriesData: any = entries ? entries[0] : ''
+  const entry: any = entries ? entries[0] : ''
 
   if (Array.isArray(user) && user.length === 0) {
     return (
       <div className='flex justify-center flex-col items-center text-[18px] font-medium h-screen w-full bg-[#302C42] text-white'>
-          <Navbar></Navbar>
-          User not found, please check user name...
+        <Navbar></Navbar>
+        User not found, please check user name...
       </div>
     )
 
   }
 
   return (
-    <main className='flex justify-center h-screen w-full' style={{ background: `${theme.bg_color}` }}>
+    <main className='flex flex-col items-center h-screen w-full' style={{ background: `${theme.bg_color}` }}>
       <Profil userData={userData} />
-      {/* <Entries e={entries}></Entries>  */}
+        <Entries theme={theme} entries={entries}></Entries>
     </main>
   )
 }
