@@ -13,7 +13,7 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 function Cart() {
   const [supabases] = useState(() => createBrowserSupabaseClient())
   const [sessionData, setSessionData] = useState<any>()
-  const {useUsers} = useUser()
+  const { useUsers } = useUser()
   const users: any = useUsers ? useUsers : [];
 
   const router = useRouter()
@@ -32,7 +32,7 @@ function Cart() {
   }, []);
 
   const openMenu = () => {
-    if(menu === false) {
+    if (menu === false) {
       setMenu(true)
     } else {
       setMenu(false)
@@ -46,11 +46,11 @@ function Cart() {
   };
 
   async function goBack() {
-      const { error } = await supabases.auth.signOut()
-      useAuth.getState().supabaseUserOut();
-      setSessionData(error)
+    const { error } = await supabases.auth.signOut()
+    useAuth.getState().supabaseUserOut();
+    setSessionData(error)
 
-      return router.push('/auth')
+    return router.push('/auth')
   }
 
   return (
@@ -60,30 +60,30 @@ function Cart() {
           onClick={openMenu}
           ref={menuRef}
           className={clsx('absolute right-10 bottom-10 w-fit px-[10px] py-[10px] bg-[#222831] text-white font-medium rounded-full transition duration-1000 ease-in-out',
-          menu === true && 'translate-y-1'
-        )}>
+            menu === true && 'translate-y-1'
+          )}>
 
-        {menu &&
-        <div className={clsx(menu === true && 'transition duration-500 ease-in-out', 'mb-[20px] flex items-center flex-col gap-[25px]')}>
+          {menu &&
+            <div className={clsx(menu === true && 'transition duration-500 ease-in-out', 'mb-[20px] flex items-center flex-col gap-[25px]')}>
 
-          <button className='text-[20px] mt-[10px]' onClick={() => router.push('/home')}>
-            <AiFillHome></AiFillHome>
-          </button>
+              <button className='text-[20px] mt-[10px]' onClick={() => router.push('/home')}>
+                <AiFillHome></AiFillHome>
+              </button>
 
-          <button className='text-[20px]' onClick={() => router.push(`/${user_name}`)}>
-            <CgProfile></CgProfile>
-          </button>
+              <button className='text-[20px]' onClick={() => router.push(`/${user_name}`)}>
+                <CgProfile></CgProfile>
+              </button>
 
-          <button className='text-[20px]' onClick={() => router.push('/admin')}>
-            <AiFillEdit></AiFillEdit>
-          </button>
+              <button className='text-[20px]' onClick={() => router.push('/admin')}>
+                <AiFillEdit></AiFillEdit>
+              </button>
 
 
-          <button className='text-[20px]' onClick={goBack}>
-            <FiLogOut></FiLogOut>
-          </button>
-        </div>
-        }
+              <button className='text-[20px]' onClick={goBack}>
+                <FiLogOut></FiLogOut>
+              </button>
+            </div>
+          }
 
           <div>
             {url !== 'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/null' &&
@@ -95,6 +95,12 @@ function Cart() {
             }
           </div>
         </button>
+      }
+
+      {!users[0]?.user_id &&
+        <button
+          className={clsx('absolute right-10 bottom-10 w-fit px-[10px] py-[3px] bg-[#222831] text-white font-medium rounded transition duration-1000 ease-in-out')} onClick={() => router.push('/auth')}>
+            Create Profil</button>
       }
     </>
   );
