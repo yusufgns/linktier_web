@@ -1,5 +1,6 @@
 ## Getting Started
 Link Tier is a social media sharing tool that allows individuals to easily share their social media accounts and customize their sharing options according to their needs. The platform aims to provide a more advanced version of Linktree.
+
 Link Tier provides users with the ability to create a personal profile. Users can gather all the important information, including links to their social media accounts, in one place. Through component structures, users can customize their profiles and make them suitable for their preferences.
 
 ## Teechnologies
