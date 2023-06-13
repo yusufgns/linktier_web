@@ -3,6 +3,7 @@ import Mob from '@/components/Admin/Mobil'
 import On_Register from '@/components/Admin/On_Register'
 import { createClient } from '@/lib/supabase-server'
 import { redirect } from 'next/navigation'
+import Edit from '@/components/Admin/Form/Edit'
 
 
 async function Admin() {
@@ -23,6 +24,7 @@ async function Admin() {
                 <div className='text-white flex mt-[10%]'>
                     <Mob></Mob>
                 </div>
+
                 {session.session &&
                     <div className='text-white flex justify-center items-center h-screen'>
                         <On_Register session={session}></On_Register>

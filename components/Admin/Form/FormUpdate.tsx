@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import EntriesSendData from './EntriesSendData'
 import LinkSendData from './LinkSendData'
 import ProfilSendData from './ProfilData'
@@ -8,14 +8,14 @@ import Navbar from './Navbar'
 import { useStore } from '@/stores/zustand'
 import { useUser } from '@/stores/User'
 import { useMobil } from '@/stores/Mobil'
-import {redirect} from 'next/navigation'
 import Settings from './Settings'
+import Edit from './Edit'
 
 
 export default function FormUpdate() {
-    const {linktire} = useStore();
-    const {useUsers} = useUser()
-    const users: any = useUsers ? useUsers: []
+    const { linktire } = useStore();
+    const { useUsers } = useUser()
+    const users: any = useUsers ? useUsers : []
 
     useEffect(() => {
         useMobil.getState().supabaseEntries()
@@ -25,31 +25,35 @@ export default function FormUpdate() {
 
     return (
         <>
-        {users[0]?.user_name &&
-            <section className='mx-[25px] h-fit w-[700px] relative flex flex-col items-center mr-[100px]'>
-            <div>
-            <Navbar />
-            {linktire === 'profil' &&
-                <span>
-                    <ProfilSendData />
-                    <LinkSendData />
-                </span>
-            }
+            {users[0]?.user_name &&
+                <section className='mx-[25px] h-fit w-[700px] relative flex flex-col items-center mr-[100px]'>
+                    <div>
+                        <Navbar />
+                        {linktire === 'profil' &&
+                            <span>
+                                <ProfilSendData />
+                                <LinkSendData />
+                            </span>
+                        }
 
-            {linktire === 'entries' &&
-                <EntriesSendData />
-            }
+                        {linktire === 'entries' &&
+                            <EntriesSendData />
+                        }
 
-            {linktire === 'theme' &&
-                <ThemeData />
-            }
+                        {linktire === 'theme' &&
+                            <ThemeData />
+                        }
 
-            {linktire === 'settings' &&
-                <Settings />
+                        {linktire === 'settings' &&
+                            <Settings />
+                        }
+
+                        {linktire === 'edit' &&
+                            <Edit />
+                        }
+                    </div>
+                </section>
             }
-            </div>
-            </section>    
-        }
         </>
     )
 }
