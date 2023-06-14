@@ -75,6 +75,7 @@ export default function EntriesSendData() {
     };
 
     const editClose = () => {
+        console.log('deneme')
         setEditData({
             id: null,
             title: null,
@@ -156,7 +157,7 @@ export default function EntriesSendData() {
 
                     <div className='relative h-[40px] w-[660px]'>
                         <p className='right-0 w-fit absolute bg-[#222831] text-white font-medium px-[10px] py-[2px] mt-[20px] rounded-md text-[15px] hover:bg-opacity-40 cursor-pointer outline-none'>
-                            <button onClick={() => editClose}>Close Edit</button>
+                            <button onClick={editClose}>Close Edit</button>
                         </p>
                     </div>
                 </>
