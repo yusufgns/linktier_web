@@ -126,7 +126,7 @@ export default function Mobil(): any {
                                                                             </div>
 
                                                                             <div className='z-10 w-[15px] py-[10px] mr-[6px]'>
-                                                                                <div className='mb-2' onClick={() => EditEntries(entry.id)}><MdEdit /></div>
+                                                                                {/* <div className='mb-2' onClick={() => EditEntries(entry.id)}><MdEdit /></div> */}
                                                                                 <div onClick={() => DeleteEntries(entry.id)}><MdDelete /></div>
                                                                             </div>
                                                                         </div>
@@ -157,7 +157,7 @@ export default function Mobil(): any {
                                                                                 </div>
                                                                             </Link>
                                                                             <div className='z-10 w-[15px] py-[10px] mr-[6px]'>
-                                                                                <div className='mb-2' onClick={() => EditEntries(entry.id)}><MdEdit /></div>
+                                                                                {/* <div className='mb-2' onClick={() => EditEntries(entry.id)}><MdEdit /></div> */}
                                                                                 <div onClick={() => DeleteEntries(entry.id)}><MdDelete /></div>
                                                                             </div>
                                                                         </div>

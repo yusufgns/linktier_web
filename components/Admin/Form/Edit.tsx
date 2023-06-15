@@ -5,7 +5,6 @@ import TextArea from '@/components/uı/TextArea';
 import Situation from '@/components/uı/Situations';
 import { BsGlobe2 } from 'react-icons/bs';
 import supabase from '@/lib/supabase-client';
-import { useMobil } from '../../../stores/Mobil';
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/stores/User';
 import { useStore } from '@/stores/zustand';
@@ -14,9 +13,8 @@ import { useEdit } from '@/stores/Edit'
 
 export default function EntriesSendData() {
     const router = useRouter()
-    const { EntriesData: EntryData } = useMobil();
     const { EditData, setEditData } = useEdit()
-    const { user_id } = useUser();
+    const { user_id, EntriesData: EntryData } = useUser();
 
     const [title, setTitle] = useState<string | null>();
     const [description, setDescription] = useState<string | null>();
@@ -43,7 +41,7 @@ export default function EntriesSendData() {
             type: type
         };
 
-        const updatedEntries = EntryData[0].EntriesData.map((entry: any) =>
+        const updatedEntries = EntryData.map((entry: any) =>
             entry.id === uid ? newEntry : entry
         );
 
@@ -58,7 +56,7 @@ export default function EntriesSendData() {
             console.log(error);
         } else {
             console.log(data);
-            useMobil.getState().supabaseEntries();
+            useUser.getState().supabaseUsers();
         }
 
         router.replace('/admin')
