@@ -47,7 +47,7 @@ export default function Mobil(): any {
         setStores(updatedStores);
 
         await supabase
-            .from('entries')
+            .from('user')
             .update({
                 EntriesData: updatedStores[0]?.EntriesData
             })
@@ -75,7 +75,7 @@ export default function Mobil(): any {
             {users[0]?.user_name &&
                 <span className='h-[700px] relative'>
                     <div
-                        className='custom-scrollbar w-[360px] overflow-auto h-[700px] px-[15px] py-[10px] flex flex-col rounded-[40px] border-[6px] relative'
+                        className='custom-scrollbar w-[400px] overflow-auto h-[700px] px-[15px] py-[10px] flex flex-col rounded-[40px] border-[6px] relative'
                         style={{ background: `${bg_color}` }}
                     >
                         <Profil />

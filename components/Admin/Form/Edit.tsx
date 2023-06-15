@@ -48,7 +48,7 @@ export default function EntriesSendData() {
         );
 
         const { data, error } = await supabase
-            .from('entries')
+            .from('user')
             .update({
                 EntriesData: updatedEntries
             })

@@ -25,7 +25,7 @@ const store = (set: any): Store => ({
     supabaseEntries: async () => {
         const { data } = await supabase.auth.getSession();
         const { data: Entries } = await supabase
-            .from('entries')
+            .from('user')
             .select('*')
             .eq('user_id', data.session?.user.id);
 

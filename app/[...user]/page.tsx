@@ -12,9 +12,9 @@ export default async function page({ params }: any) {
   const { data: user } = await supabase.from('user').select('*').eq('user_name', userName)
   const userData: any = user ? user[0] : ''
   const theme: any = user ? userData?.theme : ''
+  const entries: any = user ? userData?.EntriesData : []
 
-  const { data: entries } = await supabase.from('entries').select('*').eq('user_name', userName)
-  const entry: any = entries ? entries[0] : ''
+
 
   if (Array.isArray(user) && user.length === 0) {
     return (

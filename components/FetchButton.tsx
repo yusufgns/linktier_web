@@ -24,7 +24,7 @@ export default function Situation({ stores }: any) {
 
     const updateData = async () => {
         const { data: upEntriesData, error: upEntriesError } = await supabase
-            .from('entries')
+            .from('user')
             .update({
                 EntriesData: stores[0]?.EntriesData
             })

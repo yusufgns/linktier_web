@@ -71,6 +71,7 @@ export interface Database {
           bio: string | null
           bio_links: Json | null
           created_at: string | null
+          EntriesData: Json | null
           id: number
           theme: Json
           user_firstname: string
@@ -83,6 +84,7 @@ export interface Database {
           bio?: string | null
           bio_links?: Json | null
           created_at?: string | null
+          EntriesData?: Json | null
           id?: number
           theme: Json
           user_firstname: string
@@ -95,6 +97,7 @@ export interface Database {
           bio?: string | null
           bio_links?: Json | null
           created_at?: string | null
+          EntriesData?: Json | null
           id?: number
           theme?: Json
           user_firstname?: string

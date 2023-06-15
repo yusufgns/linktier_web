@@ -40,7 +40,7 @@ export default function EntriesSendData() {
     const updatedData: any = [...EntryData[0].EntriesData, newEntry];
 
     const { data, error } = await supabase
-      .from('entries')
+      .from('user')
       .update({
         EntriesData: updatedData
       })
