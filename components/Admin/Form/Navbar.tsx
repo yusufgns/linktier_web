@@ -1,9 +1,11 @@
 'use client'
 import { useStore } from '@/stores/zustand'
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
-    const {linktire} = useStore()
+    const router = useRouter()
+    const { linktire } = useStore()
     const linktierData = (e: any) => {
         useStore.setState({
             linktire: e
@@ -30,12 +32,12 @@ export default function Navbar() {
                 '
             >
                 <button onClick={() => linktierData('entries')} className={clsx('active:bg-[#393E46] focus:bg-[#393E46] py-[3px] px-[15px] rounded',
-                        linktire === 'entries' && 'bg-[#393E46]'
+                    linktire === 'entries' && 'bg-[#393E46]'
                 )}>Entries</button>
                 <button onClick={() => linktierData('theme')} className='active:bg-[#393E46] focus:bg-[#393E46] py-[3px] px-[15px] rounded'>Theme</button>
                 <button onClick={() => linktierData('profil')} className='active:bg-[#393E46] focus:bg-[#393E46] py-[3px] px-[15px] rounded'>Profil</button>
                 <button onClick={() => linktierData('settings')} className='active:bg-[#393E46] focus:bg-[#393E46] py-[3px] px-[15px] rounded'>Settings</button>
             </div>
         </span>
-  )
+    )
 }

@@ -8,6 +8,7 @@ interface InputsI {
     onChange: (e: any) => any,
     onClick?: (e: any) => any,
     value: string | number | any,
+    className?: string | null
 }
 
 const Inputs: React.FC<InputsI> = ({
@@ -16,7 +17,8 @@ const Inputs: React.FC<InputsI> = ({
     placeholder,
     onChange,
     value,
-    onClick
+    onClick,
+    className
 }: InputsI) => {
     return (
         <span>
@@ -41,6 +43,7 @@ const Inputs: React.FC<InputsI> = ({
                         type === 'edit' && 'w-[190px] h-[45px]  rounded px-[15px]',
                         type === 'title' && 'w-full h-[45px]  rounded px-[15px]',
                         type === 'links' && 'w-full h-[25px]  rounded text-[14px] px-[5px]',
+                        className
                     )}
                 />
             }
@@ -60,7 +63,8 @@ const Inputs: React.FC<InputsI> = ({
                         }
                     }}
                     className={clsx(
-                        'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
+                        'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]',
+                        className
                     )}
                 />
             }
@@ -80,7 +84,8 @@ const Inputs: React.FC<InputsI> = ({
                         }
                     }}
                     className={clsx(
-                        'invalid:border-red-500 outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
+                        'invalid:border-red-500 outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]',
+                        className
                     )}
                 />
             }
@@ -98,7 +103,8 @@ const Inputs: React.FC<InputsI> = ({
                         }
                     }}
                     className={clsx(
-                        'invalid:border-red-500 outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
+                        'invalid:border-red-500 outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]',
+                        className
                     )}
                 />
             }
@@ -117,7 +123,8 @@ const Inputs: React.FC<InputsI> = ({
                         }
                     }}
                     className={clsx(
-                        'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]'
+                        'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]',
+                        className
                     )}
                 />
             }
@@ -137,6 +144,7 @@ const Inputs: React.FC<InputsI> = ({
                     }}
                     className={clsx(
                         'outline-none focus:bg-[#393E46] bg-[#393E46] w-full h-[45px] rounded px-[15px]',
+                        className
                     )}
                 />
             }

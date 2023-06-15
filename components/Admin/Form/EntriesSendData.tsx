@@ -5,15 +5,13 @@ import TextArea from '@/components/uı/TextArea';
 import Situation from '@/components/uı/Situations';
 import { BsGlobe2 } from 'react-icons/bs';
 import supabase from '@/lib/supabase-client';
-import { useMobil } from '../../../stores/Mobil';
 import {useRouter} from 'next/navigation'
 import { useUser } from '@/stores/User';
 
 export default function EntriesSendData() {
   const router = useRouter()
-  const { EntriesData: EntryData } = useMobil();
 
-  const {user_id, user_name} = useUser();
+  const {user_id, user_name, EntriesData: EntryData} = useUser();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -37,7 +35,7 @@ export default function EntriesSendData() {
       type: type
     };
 
-    const updatedData: any = [...EntryData[0].EntriesData, newEntry];
+    const updatedData: any = [...EntryData, newEntry];
 
     const { data, error } = await supabase
       .from('user')
@@ -50,7 +48,7 @@ export default function EntriesSendData() {
       console.log(error);
     } else {
       console.log(data);
-      useMobil.getState().supabaseEntries();
+      useUser.getState().supabaseUsers();
     }
 
     router.replace('/admin')
@@ -76,7 +74,6 @@ export default function EntriesSendData() {
             px-[25px]
             py-[20px]
             mt-[20px]
-            w-[660px]
             text-white
         '
       >
@@ -99,8 +96,9 @@ export default function EntriesSendData() {
           ></Situation>
         </div>
 
-        <div>
+        <div className='mt-[12px]'>
           <TextArea
+          className={'bg-[#393E46]'}
             type={'des'}
             length={160}
             onChange={(e: any) => setDescription(e.target.value)}

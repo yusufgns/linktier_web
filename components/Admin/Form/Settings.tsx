@@ -7,8 +7,9 @@ import supabase from '@/lib/supabase-client'
 import UploadAvatar from '@/components/uı/UploadAvatar'
 import {useFileStore} from '@/stores/SelectFile'
 import { v4 as uuidv4 } from "uuid";
+import clsx from 'clsx'
 
-export default function ProfilSendData() {
+export default function ProfilSendData({className}: {className?: string | null}) {
     const {setUserName, setAvatarUrl, user_name} = useUser()
     const { 
         selectedFile,
@@ -77,10 +78,9 @@ export default function ProfilSendData() {
                 h-fit
                 px-[25px]
                 py-[20px]
-                w-[660px]
                 text-white
                 '>
-                    <div className='flex items-center justify-between'>
+                    <div className={clsx('flex items-center justify-between', className)}>
                         <div className='flex items-center gap-[15px]'>
                             <UploadAvatar></UploadAvatar>
                             <Input type={'edit'} length={22} placeholder={userName} value={iusername} onChange={(e: any) => setInputUserName(e.target.value)}></Input>

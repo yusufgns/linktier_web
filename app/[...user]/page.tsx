@@ -14,6 +14,8 @@ export default async function page({ params }: any) {
   const theme: any = user ? userData?.theme : ''
   const entries: any = user ? userData?.EntriesData : []
 
+  console.log(entries)
+
 
 
   if (Array.isArray(user) && user.length === 0) {

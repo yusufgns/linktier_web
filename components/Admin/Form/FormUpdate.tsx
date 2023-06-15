@@ -7,7 +7,6 @@ import ThemeData from './ThemeData'
 import Navbar from './Navbar'
 import { useStore } from '@/stores/zustand'
 import { useUser } from '@/stores/User'
-import { useMobil } from '@/stores/Mobil'
 import Settings from './Settings'
 import Edit from './Edit'
 
@@ -18,7 +17,6 @@ export default function FormUpdate() {
     const users: any = useUsers ? useUsers : []
 
     useEffect(() => {
-        useMobil.getState().supabaseEntries()
         useUser.getState().supabaseUsers()
     }, [])
 
@@ -31,7 +29,7 @@ export default function FormUpdate() {
                         <Navbar />
                         {linktire === 'profil' &&
                             <span>
-                                <ProfilSendData />
+                                <ProfilSendData className={'py-[20px]'} />
                                 <LinkSendData />
                             </span>
                         }

@@ -4,25 +4,31 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Profil from './Profil/Profil';
 import FetchButton from '@/components/FetchButton';
 import Link from 'next/link'
-import { useMobil } from '../../stores/Mobil'
 import { useUser } from '../../stores/User'
 import SituationBlock from '../uı/SituationBloc'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import supabase from '@/lib/supabase-client';
 import { useEdit } from '@/stores/Edit'
 import { useStore } from '@/stores/zustand'
+import { IoIosAddCircle, IoMdColorPalette } from 'react-icons/io'
+import { FaTimesCircle } from 'react-icons/fa'
+import ThemeData from './Form/ThemeData';
+import Entries from './Form/Entries';
+import Settings from '../Admin/Form/Settings'
+import ProfilData from '../Admin/Form/ProfilData'
+import LinkSendData from './Form/LinkSendData';
+import Notif, { ErrorNotify, SuccesNotify } from '@/components/Notification'
 
 export default function Mobil(): any {
-    const { bg_color, comp_color, completing_color, overdue_color, text_color, useUsers } = useUser()
-    const { EntriesData } = useMobil()
+    const { bg_color, comp_color, completing_color, overdue_color, text_color, useUsers, EntriesData } = useUser()
     const users: any = useUsers ? useUsers : []
     const { EditData, setEditData } = useEdit()
     const [stores, setStores] = useState<any>([]);
-    const { linktire } = useStore()
+    const { linktire, mobil_menu } = useStore()
 
     useEffect(() => {
-        setStores(useMobil.getState().EntriesData)
-    }, [EntriesData]);
+        setStores(EntriesData)
+    }, [EntriesData])
 
     const handleDragEnd = (result: any, entryIndex: number) => {
         const { source, destination } = result;
@@ -39,19 +45,25 @@ export default function Mobil(): any {
     };
 
     const DeleteEntries = async (entryId: any) => {
-        const updatedStores = stores.map((entry: any) => {
-            const updatedEntriesData = entry.EntriesData.filter((e: any) => e.id !== entryId);
-            return { ...entry, EntriesData: updatedEntriesData };
-        });
+        const updatedStores = stores.filter((store: any) => store.id !== entryId);
 
         setStores(updatedStores);
 
-        await supabase
+        const { data, error } = await supabase
             .from('user')
             .update({
-                EntriesData: updatedStores[0]?.EntriesData
+                EntriesData: updatedStores
             })
             .eq('user_id', users[0]?.user_id)
+
+        navigator.clipboard.writeText('text')
+            .then(() => {
+                SuccesNotify('Delete Entries!')
+            })
+            .catch((error) => {
+                ErrorNotify('Error delete entries!')
+            });
+
     };
 
     const EditEntries = (entryId: any) => {
@@ -70,96 +82,151 @@ export default function Mobil(): any {
         setStores(updatedStores);
     };
 
+    const MenuStores = (e: any) => {
+        useStore.setState({
+            mobil_menu: e
+        });
+    }
+
+
     return (
         <>
+            <Notif></Notif>
             {users[0]?.user_name &&
                 <span className='h-[700px] relative'>
                     <div
-                        className='custom-scrollbar w-[400px] overflow-auto h-[700px] px-[15px] py-[10px] flex flex-col rounded-[40px] border-[6px] relative'
+                        className='custom-scrollbar w-[400px] overflow-auto h-[700px] flex flex-col rounded-[40px] border-[6px] relative'
                         style={{ background: `${bg_color}` }}
                     >
-                        <Profil />
-                        <div className='flex flex-col gap-[15px]'>
-                            {stores.map((entry: any, entryIndex: number) => (
-                                <div
-                                    className='rounded-lg mt-[5px] mb-[5px] relative'
-                                    key={entry.id || entryIndex}
-                                >
-                                    {entry.EntriesData?.length > 0 && (
+                        <span className='px-[15px] py-[10px]'>
+                            <Profil />
+                            <div className='flex flex-col'>
+                                {stores.map((entry: any, entryIndex: number) => (
+                                    <div
+                                        className='rounded-lg relative'
+                                        key={entry.id || entryIndex}
+                                    >
                                         <DragDropContext onDragEnd={(result) => handleDragEnd(result, entryIndex)}>
                                             <Droppable droppableId={entry.id.toString()} type='entry'>
                                                 {(provided) => (
                                                     <div {...provided.droppableProps} ref={provided.innerRef}>
-                                                        {entry.EntriesData.map((e: any, eIndex: number) => (
-                                                            <Draggable draggableId={`${entry.id}-${e.id}`} key={`${entry.id}-${e.id}`} index={eIndex}>
-                                                                {(provided) => (
-                                                                    <div {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
-                                                                        {!e.website && (
-                                                                            <div className=' rounded-lg mt-[5px] mb-[5px] flex items-center relative' style={{ background: `${comp_color}` }}>
-                                                                                <div className='h-fit px-[18px] py-[10px] w-full'>
-                                                                                    <div className='flex items-center justify-between break-words max-w-[332px]'>
-                                                                                        <p className='text-[14px] break-words' style={{ color: `${text_color}` }}>{e.title}</p>
-                                                                                        <SituationBlock type={e.type} completing_color={completing_color} overdue_color={overdue_color} />
-                                                                                    </div>
-                                                                                    <div className='mt-[5px] break-words text-[11px]' style={{ color: `${text_color}` }}>
-                                                                                        {e.description}
-                                                                                    </div>
+                                                        <Draggable draggableId={`${entry.id}-${entry.id}`} key={`${entry.id}-${entry.id}`} index={entryIndex}>
+                                                            {(provided) => (
+                                                                <div {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
+                                                                    {!entry.website && (
+                                                                        <div className=' rounded-lg mt-[5px] mb-[5px] flex items-center relative' style={{ background: `${comp_color}` }}>
+                                                                            <div className='h-fit px-[18px] py-[10px] w-full'>
+                                                                                <div className='flex items-center justify-between break-words max-w-[332px]'>
+                                                                                    <p className='text-[14px] break-words' style={{ color: `${text_color}` }}>{entry.title}</p>
+                                                                                    <SituationBlock type={entry.type} completing_color={completing_color} overdue_color={overdue_color} />
                                                                                 </div>
-
-                                                                                <div className='z-10 w-[15px] py-[10px] mr-[6px]'>
-                                                                                    <div className='mb-2' onClick={() => EditEntries(e.id)}><MdEdit /></div>
-                                                                                    <div onClick={() => DeleteEntries(e.id)}><MdDelete /></div>
+                                                                                <div className='mt-[5px] break-words text-[11px]' style={{ color: `${text_color}` }}>
+                                                                                    {entry.description}
                                                                                 </div>
                                                                             </div>
-                                                                        )}
 
-                                                                        {e.website && (
-                                                                            <div className=' rounded-lg mt-[5px] mb-[5px] flex items-center relative' style={{ background: `${comp_color}` }}>
-                                                                                <Link href={'https://www.' + e.website} target='_blank' className='w-full'>
-                                                                                    <div className='
+                                                                            <div className='z-10 w-[15px] py-[10px] mr-[6px]'>
+                                                                                <div className='mb-2' onClick={() => EditEntries(entry.id)}><MdEdit /></div>
+                                                                                <div onClick={() => DeleteEntries(entry.id)}><MdDelete /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    )}
+
+                                                                    {entry.website && (
+                                                                        <div className=' rounded-lg mt-[5px] mb-[5px] flex items-center relative' style={{ background: `${comp_color}` }}>
+                                                                            <Link href={'https://www.' + entry.website} target='_blank' className='w-full'>
+                                                                                <div className='
                                                                                     hover:opacity-50
                                                                                     rounded-lg 
                                                                                     mt-[5px] 
                                                                                     mb-[5px]
                                                                                     flex
                                                                                     items-center'
-                                                                                        style={{ background: `${comp_color}` }}>
-                                                                                        <div className='h-fit px-[18px] py-[10px] w-full'>
-                                                                                            <div className='flex items-center justify-between break-words max-w-[332px]'>
-                                                                                                <p className='text-[14px] break-words' style={{ color: `${text_color}` }}>
-                                                                                                    {e.title}
-                                                                                                </p>
-                                                                                                <SituationBlock type={e.type} completing_color={completing_color} overdue_color={overdue_color} />
-                                                                                            </div>
-                                                                                            <div className='mt-[5px] break-words text-[11px]' style={{ color: `${text_color}` }}>
-                                                                                                {e.description}
-                                                                                            </div>
+                                                                                    style={{ background: `${comp_color}` }}>
+                                                                                    <div className='h-fit px-[18px] py-[10px] w-full'>
+                                                                                        <div className='flex items-center justify-between break-words max-w-[332px]'>
+                                                                                            <p className='text-[14px] break-words' style={{ color: `${text_color}` }}>
+                                                                                                {entry.title}
+                                                                                            </p>
+                                                                                            <SituationBlock type={entry.type} completing_color={completing_color} overdue_color={overdue_color} />
+                                                                                        </div>
+                                                                                        <div className='mt-[5px] break-words text-[11px]' style={{ color: `${text_color}` }}>
+                                                                                            {entry.description}
                                                                                         </div>
                                                                                     </div>
-                                                                                </Link>
-                                                                                <div className='z-10 w-[15px] py-[10px] mr-[6px]'>
-                                                                                    <div className='mb-2' onClick={() => EditEntries(e.id)}><MdEdit /></div>
-                                                                                    <div onClick={() => DeleteEntries(e.id)}><MdDelete /></div>
                                                                                 </div>
+                                                                            </Link>
+                                                                            <div className='z-10 w-[15px] py-[10px] mr-[6px]'>
+                                                                                <div className='mb-2' onClick={() => EditEntries(entry.id)}><MdEdit /></div>
+                                                                                <div onClick={() => DeleteEntries(entry.id)}><MdDelete /></div>
                                                                             </div>
-                                                                        )}
-                                                                    </div>
-                                                                )}
-                                                            </Draggable>
-                                                        ))}
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                        </Draggable>
                                                         {provided.placeholder}
                                                     </div>
                                                 )}
                                             </Droppable>
                                         </DragDropContext>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </span>
 
-                    <div>
-                        <FetchButton stores={stores} />
+                        <div className='absolute bottom-0 w-full h-[80px] flex items-center justify-center z-[9999]' style={{ color: `${text_color}` }}>
+                            {mobil_menu == '' &&
+                                <div className='h-[50px]'>
+                                    <FetchButton stores={stores} />
+                                </div>
+                            }
+
+                            <div className='absolute text-[30px] rounded-full right-4' onClick={() => MenuStores('entries')}>
+                                <div><IoIosAddCircle></IoIosAddCircle></div>
+                            </div>
+
+                            <div className='absolute text-[30px] rounded-full left-4' onClick={() => MenuStores('theme')}>
+                                <IoMdColorPalette></IoMdColorPalette>
+                            </div>
+                        </div>
+
+                        {mobil_menu !== '' &&
+                            <div className='bg-[#222831] w-full h-full absolute z-[999]'>
+                                <div className='absolute py-[25px] w-full'>
+                                    <span className='flex items-center justify-between px-[20px]'>
+                                        <h1 className='font-medium text-[18px]'>
+                                            {mobil_menu === 'theme' && 'Theme Color'}
+                                            {mobil_menu === 'entries' && 'Entries'}
+                                            {mobil_menu === 'settings' && 'Settings'}
+                                        </h1>
+
+                                        <span className='text-[22px]' onClick={() => MenuStores('')}>
+                                            <FaTimesCircle></FaTimesCircle>
+                                        </span>
+                                    </span>
+
+                                    {mobil_menu === 'theme' &&
+                                        <div>
+                                            <ThemeData></ThemeData>
+                                        </div>
+                                    }
+
+                                    {mobil_menu === 'entries' &&
+                                        <div>
+                                            <Entries></Entries>
+                                        </div>
+                                    }
+
+                                    {mobil_menu === 'settings' &&
+                                        <div className='mt-[25px]'>
+                                            <ProfilData></ProfilData>
+                                            <LinkSendData></LinkSendData>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
                     </div>
                 </span>
             }

@@ -48,10 +48,11 @@ interface Store {
     user_name?: string | undefined;
     avatar_url?: string | undefined;
     user_id?: string | undefined;
+    EntriesData: []
 }
 
 const store = (set: any): Store => ({
-    setBg_color: (data: any) => set({ bg_color: data  }),
+    setBg_color: (data: any) => set({ bg_color: data.color1, comp_color: data.color2 }),
     setCompC: (data: any) => set({ comp_color: data }),
     setCompletingC: (data: any) => set({ completing_color: data }),
     setOverdueC: (data: any) => set({ overdue_color: data }),
@@ -85,6 +86,7 @@ const store = (set: any): Store => ({
     user_name: '',
     avatar_url: '',
     user_id: '',
+    EntriesData: [],
 
     supabaseUsers: async () => {
         const { data: userID } = await supabase.auth.getUser();
@@ -107,6 +109,7 @@ const store = (set: any): Store => ({
                 bio: e.bio,
                 user_firstname: e.user_firstname,
                 bio_links: e.bio_links,
+                EntriesData: e.EntriesData
             })): {};
 
         set({
@@ -122,7 +125,7 @@ const store = (set: any): Store => ({
             user_firstname: supaUser[0]?.user_firstname,
             user_name: supaUser[0]?.user_name,
             avatar_url: supaUser[0]?.avatar_url,
-            
+            EntriesData: supaUser[0]?.EntriesData,
             linkData: supaUser[0]?.bio_links,
         });
     },

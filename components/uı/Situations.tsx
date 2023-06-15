@@ -6,6 +6,7 @@ interface SituationI {
     value2: 'Completing' | null,
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
     value: 'Empty' | 'Over Due' | 'Completing' | string,
+    className?: string | null
 }
 
 
@@ -14,6 +15,7 @@ const Situation: React.FC<SituationI> = ({
     value2,
     onChange,
     value,
+    className
 }) => {
 
     return (
@@ -22,7 +24,8 @@ const Situation: React.FC<SituationI> = ({
             name="origin"
             required
             value={value}
-            className="h-[30px] rounded-md text-center bg-[#393E46] text-white outline-none font-medium">
+            className={clsx("h-[30px] rounded-md text-center bg-[#393E46] text-white outline-none font-medium",
+            className)}>
             <option>Empty</option>
             <option>{value1}</option>
             <option>{value2}</option>

@@ -20,9 +20,8 @@ function Cart() {
   const [menu, setMenu] = useState(false);
 
   const { avatar_url, user_id, user_name } = useUser();
-  const menuRef = useRef<HTMLButtonElement | null>(null);
   let url: any = 'https://nmcceegbiexzqgkclyxx.supabase.co/storage/v1/object/public/avatars/' + `${avatar_url}`;
-
+  
   useEffect(() => {
     useUser.getState().supabaseUsers();
     document.addEventListener('mousedown', handleClickOutside);
@@ -38,7 +37,8 @@ function Cart() {
       setMenu(false)
     }
   }
-
+  const menuRef = useRef<HTMLButtonElement | null>(null);
+  
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       setMenu(false);

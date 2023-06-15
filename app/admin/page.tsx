@@ -1,5 +1,5 @@
 import FormUpdate from '@/components/Admin/Form/FormUpdate'
-import Mob from '@/components/Admin/Mobil'
+import Mobil from '@/components/Admin/Mobil'
 import On_Register from '@/components/Admin/On_Register'
 import { createClient } from '@/lib/supabase-server'
 import { redirect } from 'next/navigation'
@@ -16,13 +16,9 @@ async function Admin() {
 
     return (
         <main className='w-full flex justify-center items-center relative'>
-            <div className='flex'>
-                <div className='text-white'>
-                    <FormUpdate></FormUpdate>
-                </div>
-
-                <div className='text-white flex mt-[10%]'>
-                    <Mob></Mob>
+            <div className='flex items-center justify-center'>
+                <div className='text-white flex'>
+                    <Mobil></Mobil>
                 </div>
 
                 {session.session &&
