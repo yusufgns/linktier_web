@@ -38,7 +38,7 @@ export default function Profil() {
 
     const openProfilLink = (e: string) => {
         setProfil(!profil)
-        navigator.clipboard.writeText('https://mdiary.vercel.app/' + e)
+        navigator.clipboard.writeText('https://linktier.vercel.app/' + e)
             .then(() => {
                 SuccesNotify('linktier.vercel.app/' + e)
             })
