@@ -26,4 +26,7 @@ Link Tier provides users with the ability to create a personal profile. Users ca
 height="220"/>
 <img src="https://github.com/yusufgns/linktier_web/assets/99817309/1858ccbb-c2d2-4519-8eec-b596596da0bf"
 height="220"/>
+<img src="https://github.com/yusufgns/linktier_web/assets/99817309/5b248212-e808-4b53-939e-38e23f15e767"
+height="220"/>
 </div>
+
